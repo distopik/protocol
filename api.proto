@@ -1,0 +1,322 @@
+syntax = "proto3";
+package mixanalog.protocol;
+
+/**
+ * Sent to the engine by the controller. The output coding of the resulting
+ * stream is set as specified here.
+ */
+message OutputCoding {
+    /**
+     * The mux container used. For example "wav", "mp4" or "ogg" or "webm" or "raw"
+     */
+    string container = 1;
+
+    /**
+     * The codec used. For example "pcm_s24le" or "flac" or "opus"
+     */
+    string codec = 2;
+
+    /**
+     * The target sample rate that the engine should write to the result.
+     * Sample rate conversion will occur if the engine is running a different
+     * sample than this setting. For example 44100 vs. 192000
+     */
+    uint32 targetSampleRate = 3;
+
+    /**
+     * target bitrate when this is important
+     */
+    uint32 targetBitRate = 4;
+
+    /**
+     * how many packets per fragment (0 means do not fragmentize)
+     */
+    uint32 packetsPerFragment = 5;
+
+    /**
+     * how many samples per packet (0 means deduce automatically for codec)
+     */
+    uint32 samplesPerPacket = 6;
+
+    /**
+     * sample format (absent means use default)
+     */
+    string sampleFormat = 7;
+
+    /**
+     * number of output channels (0 means use default as deduced by the graph)
+     */
+    uint32 numChannels = 8;
+}
+
+/**
+ * Specification of an insert point processor.
+ */
+message InsertSpec {
+    /**
+     * name of the device which we will be using to perform our insert
+     */
+    string endpoint = 1;
+
+    /**
+     * array of input channel indices to be used as the insert
+     */
+    repeated uint32 inputChannels = 2;
+    /**
+     * array of output channel indices to be used as the insert
+     */
+    repeated uint32 outputChannels = 3;
+    /**
+     * Additional latency exhibited by the file. For example, by a tape machine.
+     * Expressed in **ENGINE SAMPLE RATE SAMPLES**
+     */
+    uint32 additionalLatency = 4;
+    /**
+     * When true, support dry/wet mixing
+     */
+    bool enableDryWet = 5;
+    /**
+     * When true, enable FFT analysis
+     */
+    bool enableFFT = 6;
+    /**
+     * Sample rate of the device stream
+     */
+    uint32 sampleRate = 7;
+    /**
+     * Buffer size of the device stream
+     */
+    uint32 bufferSize = 8;
+}
+
+/**
+ * Specification of a plugin processor
+ */
+message PluginSpec {
+    /**
+     * The identifier of the plugin. For example
+     * "AudioUnit:Effects/aufx,LdMx,Mndt"
+     */
+    string plugin = 1;
+
+    /**
+     * Additional latency exhibited by the plugin, if it is reported incorrectly.
+     * May be negative. Expressed in **ENGINE SAMPLE RATE SAMPLES**
+     */
+    int32 additionalLatency = 3;
+}
+
+/**
+ * A specification of a processor - maybe insert, maybe plugin
+ */
+message ProcessorSpec {
+    oneof spec {
+        InsertSpec insert = 1;
+        PluginSpec plugin = 2;
+    }
+}
+
+/**
+ * Sent by the controller to the engine. Sets the path to the file on the
+ * local filesystem of the engine.
+ */
+message Input {
+    /**
+     * Path to the file on the local filesystem of the engine.
+     */
+    string localPath = 1;
+
+    /**
+     * Where to start playing?
+     */
+    double startPos = 2;
+
+    /**
+     * Where to end playing?
+     */
+    double endPos = 3;
+}
+
+/**
+ * Measurement taken by the engine, like RMS or Peak level, Gain Reduction,
+ * overdrive, ...
+ */
+message Measurement {
+    /**
+     * When in time relative to the source has this happened?
+     */
+    double sourceTime = 1;
+
+    /**
+     * name of the measurement
+     */
+    string name = 2;
+
+    /**
+     * The actual measurement
+     */
+    double measurement = 3;
+}
+
+/**
+ * Sent by the engine when it is ready.
+ */
+message Ready {
+}
+
+/**
+ * Sent by the engine to the controller to offer a resulting buffer.
+ */
+message AudioReady {
+    /**
+     * Output data, in the muxer, codec, sample rate specified.
+     */
+    bytes buffer = 1;
+
+    /**
+     * Measurements, keyed by a compound name. Usually, these will be keyed by
+     * processor name and measurement name, seperated by a dot. For example
+     * insert3.in_rms, limiter.gr, ...
+     */
+    repeated Measurement measurements = 2;
+
+    /**
+     * The sequence number of this buffer, from the start of the last change of
+     * output configuration SetOutputCoding.
+     */
+    int32 sequence = 3;
+
+    /**
+     * Position in the media space
+     */
+    int64 sampleTime = 4;
+
+    /**
+     * true when there are more buffers to follow, false otherwise
+     */
+    bool haveMore = 5;
+}
+
+/**
+ * A Setting value that needs to be applied to a processor.
+ */
+message SettingValue {
+    string processor = 1;
+    string parameter = 2;
+    double value = 3;
+}
+
+/**
+ * Sent by the controller to the engine
+ */
+message SetSettings {
+    /**
+     * Settings, keyed by compound key - name of the processor and name of the
+     * setting, seperated by a dot. For example
+     * limiter.0, insert3.in_gain, ...
+     */
+    repeated SettingValue settings = 1;
+}
+
+/**
+ * Sent by the Controller to the Engine when it should shut down!
+ * No buts no questions, just terminate
+ */
+message Terminate {
+}
+
+/**
+ * Sent by the Engine to the Controller when it is about to exit.
+ */
+message Terminated {
+    string reason = 1;
+}
+
+message Connection {
+    string fromNode = 1;
+    string fromPad = 2;
+    string toNode = 3;
+    string toPad = 4;
+}
+
+message Play {
+    map<string, Input> inputs = 1;
+    map<string, ProcessorSpec> processors = 3;
+    OutputCoding output = 2;
+    repeated Connection flow = 4;
+    SetSettings settings = 5;
+}
+
+/* to the engine */
+message Request {
+    uint32 requestId = 1;
+
+    oneof message {
+        Play play = 2;
+        SetSettings setSettings = 3;
+        Terminate terminate = 4;
+    }
+}
+
+message Ok {
+}
+
+message Failure {
+    string reason = 1;
+}
+
+message Response {
+    uint32 requestId = 1;
+
+    oneof message {
+        Ok ok = 2;
+        Failure failure = 3;
+    }
+}
+
+message Event {
+    oneof message {
+        Ready ready = 1;
+        AudioReady audioReady = 2;
+        Terminated terminated = 3;
+    }
+}
+
+message PublicRequest {
+    uint32 requestId = 1;
+
+    oneof message {
+        PublicPlay play = 2;
+        SetSettings setSettings = 3;
+        PublicDownload download = 4;
+    }
+}
+
+message PublicPlay {
+    map<string, PublicInput> inputs = 1;
+    string outputCodingPreset = 2;
+    SetSettings settings = 3;
+}
+
+message PublicInput {
+    /**
+     * Media ID
+     */
+    string mediaId = 1;
+
+    /**
+     * Where to start playing?
+     */
+    double startPos = 2;
+
+    /**
+     * Where to end playing?
+     */
+    double endPos = 3;
+}
+
+message PublicDownload {
+    map<string, PublicInput> inputs = 1;
+    string downloadCodingPreset = 2;
+    SetSettings settings = 3;
+}
