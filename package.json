@@ -1,0 +1,19 @@
+{
+  "name": "protocol",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+	"update": "pbjs -t json *.proto > api.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.com:distopik/mixanalog/protocol.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "protobufjs": "^6.8.5"
+  }
+}

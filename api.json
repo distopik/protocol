@@ -1,0 +1,429 @@
+{
+  "nested": {
+    "mixanalog": {
+      "nested": {
+        "protocol": {
+          "nested": {
+            "OutputCoding": {
+              "fields": {
+                "container": {
+                  "type": "string",
+                  "id": 1
+                },
+                "codec": {
+                  "type": "string",
+                  "id": 2
+                },
+                "targetSampleRate": {
+                  "type": "uint32",
+                  "id": 3
+                },
+                "targetBitRate": {
+                  "type": "uint32",
+                  "id": 4
+                },
+                "packetsPerFragment": {
+                  "type": "uint32",
+                  "id": 5
+                },
+                "samplesPerPacket": {
+                  "type": "uint32",
+                  "id": 6
+                },
+                "sampleFormat": {
+                  "type": "string",
+                  "id": 7
+                },
+                "numChannels": {
+                  "type": "uint32",
+                  "id": 8
+                }
+              }
+            },
+            "InsertSpec": {
+              "fields": {
+                "endpoint": {
+                  "type": "string",
+                  "id": 1
+                },
+                "inputChannels": {
+                  "rule": "repeated",
+                  "type": "uint32",
+                  "id": 2
+                },
+                "outputChannels": {
+                  "rule": "repeated",
+                  "type": "uint32",
+                  "id": 3
+                },
+                "additionalLatency": {
+                  "type": "uint32",
+                  "id": 4
+                },
+                "enableDryWet": {
+                  "type": "bool",
+                  "id": 5
+                },
+                "enableFFT": {
+                  "type": "bool",
+                  "id": 6
+                },
+                "sampleRate": {
+                  "type": "uint32",
+                  "id": 7
+                },
+                "bufferSize": {
+                  "type": "uint32",
+                  "id": 8
+                }
+              }
+            },
+            "PluginSpec": {
+              "fields": {
+                "plugin": {
+                  "type": "string",
+                  "id": 1
+                },
+                "additionalLatency": {
+                  "type": "int32",
+                  "id": 3
+                }
+              }
+            },
+            "ProcessorSpec": {
+              "oneofs": {
+                "spec": {
+                  "oneof": [
+                    "insert",
+                    "plugin"
+                  ]
+                }
+              },
+              "fields": {
+                "insert": {
+                  "type": "InsertSpec",
+                  "id": 1
+                },
+                "plugin": {
+                  "type": "PluginSpec",
+                  "id": 2
+                }
+              }
+            },
+            "Input": {
+              "fields": {
+                "localPath": {
+                  "type": "string",
+                  "id": 1
+                },
+                "startPos": {
+                  "type": "double",
+                  "id": 2
+                },
+                "endPos": {
+                  "type": "double",
+                  "id": 3
+                }
+              }
+            },
+            "Measurement": {
+              "fields": {
+                "sourceTime": {
+                  "type": "double",
+                  "id": 1
+                },
+                "name": {
+                  "type": "string",
+                  "id": 2
+                },
+                "measurement": {
+                  "type": "double",
+                  "id": 3
+                }
+              }
+            },
+            "Ready": {
+              "fields": {}
+            },
+            "AudioReady": {
+              "fields": {
+                "buffer": {
+                  "type": "bytes",
+                  "id": 1
+                },
+                "measurements": {
+                  "rule": "repeated",
+                  "type": "Measurement",
+                  "id": 2
+                },
+                "sequence": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "sampleTime": {
+                  "type": "int64",
+                  "id": 4
+                },
+                "haveMore": {
+                  "type": "bool",
+                  "id": 5
+                }
+              }
+            },
+            "SettingValue": {
+              "fields": {
+                "processor": {
+                  "type": "string",
+                  "id": 1
+                },
+                "parameter": {
+                  "type": "string",
+                  "id": 2
+                },
+                "value": {
+                  "type": "double",
+                  "id": 3
+                }
+              }
+            },
+            "SetSettings": {
+              "fields": {
+                "settings": {
+                  "rule": "repeated",
+                  "type": "SettingValue",
+                  "id": 1
+                }
+              }
+            },
+            "Terminate": {
+              "fields": {}
+            },
+            "Terminated": {
+              "fields": {
+                "reason": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "Connection": {
+              "fields": {
+                "fromNode": {
+                  "type": "string",
+                  "id": 1
+                },
+                "fromPad": {
+                  "type": "string",
+                  "id": 2
+                },
+                "toNode": {
+                  "type": "string",
+                  "id": 3
+                },
+                "toPad": {
+                  "type": "string",
+                  "id": 4
+                }
+              }
+            },
+            "Play": {
+              "fields": {
+                "inputs": {
+                  "keyType": "string",
+                  "type": "Input",
+                  "id": 1
+                },
+                "processors": {
+                  "keyType": "string",
+                  "type": "ProcessorSpec",
+                  "id": 3
+                },
+                "output": {
+                  "type": "OutputCoding",
+                  "id": 2
+                },
+                "flow": {
+                  "rule": "repeated",
+                  "type": "Connection",
+                  "id": 4
+                },
+                "settings": {
+                  "type": "SetSettings",
+                  "id": 5
+                }
+              }
+            },
+            "Request": {
+              "oneofs": {
+                "message": {
+                  "oneof": [
+                    "play",
+                    "setSettings",
+                    "terminate"
+                  ]
+                }
+              },
+              "fields": {
+                "requestId": {
+                  "type": "uint32",
+                  "id": 1
+                },
+                "play": {
+                  "type": "Play",
+                  "id": 2
+                },
+                "setSettings": {
+                  "type": "SetSettings",
+                  "id": 3
+                },
+                "terminate": {
+                  "type": "Terminate",
+                  "id": 4
+                }
+              }
+            },
+            "Ok": {
+              "fields": {}
+            },
+            "Failure": {
+              "fields": {
+                "reason": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "Response": {
+              "oneofs": {
+                "message": {
+                  "oneof": [
+                    "ok",
+                    "failure"
+                  ]
+                }
+              },
+              "fields": {
+                "requestId": {
+                  "type": "uint32",
+                  "id": 1
+                },
+                "ok": {
+                  "type": "Ok",
+                  "id": 2
+                },
+                "failure": {
+                  "type": "Failure",
+                  "id": 3
+                }
+              }
+            },
+            "Event": {
+              "oneofs": {
+                "message": {
+                  "oneof": [
+                    "ready",
+                    "audioReady",
+                    "terminated"
+                  ]
+                }
+              },
+              "fields": {
+                "ready": {
+                  "type": "Ready",
+                  "id": 1
+                },
+                "audioReady": {
+                  "type": "AudioReady",
+                  "id": 2
+                },
+                "terminated": {
+                  "type": "Terminated",
+                  "id": 3
+                }
+              }
+            },
+            "PublicRequest": {
+              "oneofs": {
+                "message": {
+                  "oneof": [
+                    "play",
+                    "setSettings",
+                    "download"
+                  ]
+                }
+              },
+              "fields": {
+                "requestId": {
+                  "type": "uint32",
+                  "id": 1
+                },
+                "play": {
+                  "type": "PublicPlay",
+                  "id": 2
+                },
+                "setSettings": {
+                  "type": "SetSettings",
+                  "id": 3
+                },
+                "download": {
+                  "type": "PublicDownload",
+                  "id": 4
+                }
+              }
+            },
+            "PublicPlay": {
+              "fields": {
+                "inputs": {
+                  "keyType": "string",
+                  "type": "PublicInput",
+                  "id": 1
+                },
+                "outputCodingPreset": {
+                  "type": "string",
+                  "id": 2
+                },
+                "settings": {
+                  "type": "SetSettings",
+                  "id": 3
+                }
+              }
+            },
+            "PublicInput": {
+              "fields": {
+                "mediaId": {
+                  "type": "string",
+                  "id": 1
+                },
+                "startPos": {
+                  "type": "double",
+                  "id": 2
+                },
+                "endPos": {
+                  "type": "double",
+                  "id": 3
+                }
+              }
+            },
+            "PublicDownload": {
+              "fields": {
+                "inputs": {
+                  "keyType": "string",
+                  "type": "PublicInput",
+                  "id": 1
+                },
+                "downloadCodingPreset": {
+                  "type": "string",
+                  "id": 2
+                },
+                "settings": {
+                  "type": "SetSettings",
+                  "id": 3
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
