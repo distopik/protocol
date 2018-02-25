@@ -320,3 +320,10 @@ message PublicDownload {
     string downloadCodingPreset = 2;
     SetSettings settings = 3;
 }
+
+message PublicFrame {
+    oneof frame {
+        Event event = 1;
+        Response response = 2;
+    }
+}
