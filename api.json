@@ -385,6 +385,10 @@
                 "settings": {
                   "type": "SetSettings",
                   "id": 3
+                },
+                "sampleRate": {
+                  "type": "uint32",
+                  "id": 4
                 }
               }
             },

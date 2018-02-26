@@ -296,6 +296,7 @@ message PublicPlay {
     map<string, PublicInput> inputs = 1;
     string outputCodingPreset = 2;
     SetSettings settings = 3;
+    uint32 sampleRate = 4;
 }
 
 message PublicInput {
