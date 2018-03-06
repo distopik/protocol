@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.com:distopik/mixanalog/protocol.git"
+    "url": "git@github.com:distopik/protocol.git"
   },
   "keywords": [],
   "author": "",
