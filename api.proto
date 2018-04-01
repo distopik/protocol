@@ -1,5 +1,4 @@
 syntax = "proto3";
-package mixanalog.protocol;
 
 /**
  * Sent to the engine by the controller. The output coding of the resulting

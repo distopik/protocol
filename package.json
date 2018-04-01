@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-	"update": "pbjs -t json *.proto > api.json"
+    "update": "pbjs -t static-module -w commonjs -o index.js api.proto && pbts -o index.d.ts index.js"
   },
   "repository": {
     "type": "git",

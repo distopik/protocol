@@ -20,7 +20,7 @@ npm manifest:
     "description": "",
     "main": "index.js",
     "scripts": {
-  	"update": "pbjs -t json *.proto > api.json"
+      "update": "pbjs -t static-module -w commonjs -o index.js *.proto && pbjs -o index.d.ts index.js"
     },
     "repository": {
       "type": "git",
@@ -119,7 +119,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c pbjs -t json *.proto > api.json
+  Arguments: -c pbjs -t static-module -w commonjs -o index.js *.proto && pbjs -o index.d.ts index.js
   Directory: /Users/bojan/Development/Distopik/mixanalogx/studio/src/protocol
   Output:
   
