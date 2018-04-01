@@ -347,6 +347,7 @@
                 "message": {
                   "oneof": [
                     "play",
+                    "stop",
                     "setSettings",
                     "download"
                   ]
@@ -361,15 +362,22 @@
                   "type": "PublicPlay",
                   "id": 2
                 },
+                "stop": {
+                  "type": "PublicStop",
+                  "id": 3
+                },
                 "setSettings": {
                   "type": "SetSettings",
-                  "id": 3
+                  "id": 4
                 },
                 "download": {
                   "type": "PublicDownload",
-                  "id": 4
+                  "id": 5
                 }
               }
+            },
+            "PublicStop": {
+              "fields": {}
             },
             "PublicPlay": {
               "fields": {

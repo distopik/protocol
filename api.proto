@@ -293,6 +293,8 @@ message PublicRequest {
     }
 }
 
+message PublicStop {}
+
 message PublicPlay {
     map<string, PublicInput> inputs = 1;
     string outputCodingPreset = 2;
