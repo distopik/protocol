@@ -287,8 +287,9 @@ message PublicRequest {
 
     oneof message {
         PublicPlay play = 2;
-        SetSettings setSettings = 3;
-        PublicDownload download = 4;
+        PublicStop stop = 3;
+        SetSettings setSettings = 4;
+        PublicDownload download = 5;
     }
 }
 
