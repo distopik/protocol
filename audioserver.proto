@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+message ChannelData {
+    uint32 index = 1;
+    bytes data = 2;
+}
+
+message ExchangeChannels {
+    repeated ChannelData channels;
+    repeated uint32 requestChannels;
+}
+
+message ProvideChannels {
+    repeated ChannelData channels;
+}
+
+service AudioServer {
+    rpc exchange(stream ExchangeChannels) returns (stream ProvideChannels);
+}

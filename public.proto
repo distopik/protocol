@@ -1,0 +1,52 @@
+syntax = "proto3";
+import "./api.proto";
+
+message PublicRequest {
+    uint32 requestId = 1;
+
+    oneof message {
+        PublicPlay play = 2;
+        PublicStop stop = 3;
+        SetSettings setSettings = 4;
+        PublicDownload download = 5;
+    }
+}
+
+message PublicStop {}
+
+message PublicPlay {
+    map<string, PublicInput> inputs = 1;
+    string outputCodingPreset = 2;
+    SetSettings settings = 3;
+    uint32 sampleRate = 4;
+}
+
+message PublicInput {
+    /**
+     * Media ID
+     */
+    string mediaId = 1;
+
+    /**
+     * Where to start playing?
+     */
+    double startPos = 2;
+
+    /**
+     * Where to end playing?
+     */
+    double endPos = 3;
+}
+
+message PublicDownload {
+    map<string, PublicInput> inputs = 1;
+    string downloadCodingPreset = 2;
+    SetSettings settings = 3;
+}
+
+message PublicFrame {
+    oneof frame {
+        Event event = 1;
+        Response response = 2;
+    }
+}
