@@ -1509,396 +1509,6 @@ export class Play implements IPlay {
     public toJSON(): { [k: string]: any };
 }
 
-/** Properties of a Request. */
-export interface IRequest {
-
-    /** Request requestId */
-    requestId?: (number|null);
-
-    /** Request play */
-    play?: (IPlay|null);
-
-    /** Request setSettings */
-    setSettings?: (ISetSettings|null);
-
-    /** Request terminate */
-    terminate?: (ITerminate|null);
-}
-
-/** Represents a Request. */
-export class Request implements IRequest {
-
-    /**
-     * Constructs a new Request.
-     * @param [properties] Properties to set
-     */
-    constructor(properties?: IRequest);
-
-    /** Request requestId. */
-    public requestId: number;
-
-    /** Request play. */
-    public play?: (IPlay|null);
-
-    /** Request setSettings. */
-    public setSettings?: (ISetSettings|null);
-
-    /** Request terminate. */
-    public terminate?: (ITerminate|null);
-
-    /** Request message. */
-    public message?: ("play"|"setSettings"|"terminate");
-
-    /**
-     * Creates a new Request instance using the specified properties.
-     * @param [properties] Properties to set
-     * @returns Request instance
-     */
-    public static create(properties?: IRequest): Request;
-
-    /**
-     * Encodes the specified Request message. Does not implicitly {@link Request.verify|verify} messages.
-     * @param message Request message or plain object to encode
-     * @param [writer] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(message: IRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-    /**
-     * Encodes the specified Request message, length delimited. Does not implicitly {@link Request.verify|verify} messages.
-     * @param message Request message or plain object to encode
-     * @param [writer] Writer to encode to
-     * @returns Writer
-     */
-    public static encodeDelimited(message: IRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-    /**
-     * Decodes a Request message from the specified reader or buffer.
-     * @param reader Reader or buffer to decode from
-     * @param [length] Message length if known beforehand
-     * @returns Request
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Request;
-
-    /**
-     * Decodes a Request message from the specified reader or buffer, length delimited.
-     * @param reader Reader or buffer to decode from
-     * @returns Request
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Request;
-
-    /**
-     * Verifies a Request message.
-     * @param message Plain object to verify
-     * @returns `null` if valid, otherwise the reason why it is not
-     */
-    public static verify(message: { [k: string]: any }): (string|null);
-
-    /**
-     * Creates a Request message from a plain object. Also converts values to their respective internal types.
-     * @param object Plain object
-     * @returns Request
-     */
-    public static fromObject(object: { [k: string]: any }): Request;
-
-    /**
-     * Creates a plain object from a Request message. Also converts values to other types if specified.
-     * @param message Request
-     * @param [options] Conversion options
-     * @returns Plain object
-     */
-    public static toObject(message: Request, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-    /**
-     * Converts this Request to JSON.
-     * @returns JSON object
-     */
-    public toJSON(): { [k: string]: any };
-}
-
-/** Properties of an Ok. */
-export interface IOk {
-}
-
-/** Represents an Ok. */
-export class Ok implements IOk {
-
-    /**
-     * Constructs a new Ok.
-     * @param [properties] Properties to set
-     */
-    constructor(properties?: IOk);
-
-    /**
-     * Creates a new Ok instance using the specified properties.
-     * @param [properties] Properties to set
-     * @returns Ok instance
-     */
-    public static create(properties?: IOk): Ok;
-
-    /**
-     * Encodes the specified Ok message. Does not implicitly {@link Ok.verify|verify} messages.
-     * @param message Ok message or plain object to encode
-     * @param [writer] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(message: IOk, writer?: $protobuf.Writer): $protobuf.Writer;
-
-    /**
-     * Encodes the specified Ok message, length delimited. Does not implicitly {@link Ok.verify|verify} messages.
-     * @param message Ok message or plain object to encode
-     * @param [writer] Writer to encode to
-     * @returns Writer
-     */
-    public static encodeDelimited(message: IOk, writer?: $protobuf.Writer): $protobuf.Writer;
-
-    /**
-     * Decodes an Ok message from the specified reader or buffer.
-     * @param reader Reader or buffer to decode from
-     * @param [length] Message length if known beforehand
-     * @returns Ok
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Ok;
-
-    /**
-     * Decodes an Ok message from the specified reader or buffer, length delimited.
-     * @param reader Reader or buffer to decode from
-     * @returns Ok
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Ok;
-
-    /**
-     * Verifies an Ok message.
-     * @param message Plain object to verify
-     * @returns `null` if valid, otherwise the reason why it is not
-     */
-    public static verify(message: { [k: string]: any }): (string|null);
-
-    /**
-     * Creates an Ok message from a plain object. Also converts values to their respective internal types.
-     * @param object Plain object
-     * @returns Ok
-     */
-    public static fromObject(object: { [k: string]: any }): Ok;
-
-    /**
-     * Creates a plain object from an Ok message. Also converts values to other types if specified.
-     * @param message Ok
-     * @param [options] Conversion options
-     * @returns Plain object
-     */
-    public static toObject(message: Ok, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-    /**
-     * Converts this Ok to JSON.
-     * @returns JSON object
-     */
-    public toJSON(): { [k: string]: any };
-}
-
-/** Properties of a Failure. */
-export interface IFailure {
-
-    /** Failure reason */
-    reason?: (string|null);
-}
-
-/** Represents a Failure. */
-export class Failure implements IFailure {
-
-    /**
-     * Constructs a new Failure.
-     * @param [properties] Properties to set
-     */
-    constructor(properties?: IFailure);
-
-    /** Failure reason. */
-    public reason: string;
-
-    /**
-     * Creates a new Failure instance using the specified properties.
-     * @param [properties] Properties to set
-     * @returns Failure instance
-     */
-    public static create(properties?: IFailure): Failure;
-
-    /**
-     * Encodes the specified Failure message. Does not implicitly {@link Failure.verify|verify} messages.
-     * @param message Failure message or plain object to encode
-     * @param [writer] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(message: IFailure, writer?: $protobuf.Writer): $protobuf.Writer;
-
-    /**
-     * Encodes the specified Failure message, length delimited. Does not implicitly {@link Failure.verify|verify} messages.
-     * @param message Failure message or plain object to encode
-     * @param [writer] Writer to encode to
-     * @returns Writer
-     */
-    public static encodeDelimited(message: IFailure, writer?: $protobuf.Writer): $protobuf.Writer;
-
-    /**
-     * Decodes a Failure message from the specified reader or buffer.
-     * @param reader Reader or buffer to decode from
-     * @param [length] Message length if known beforehand
-     * @returns Failure
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Failure;
-
-    /**
-     * Decodes a Failure message from the specified reader or buffer, length delimited.
-     * @param reader Reader or buffer to decode from
-     * @returns Failure
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Failure;
-
-    /**
-     * Verifies a Failure message.
-     * @param message Plain object to verify
-     * @returns `null` if valid, otherwise the reason why it is not
-     */
-    public static verify(message: { [k: string]: any }): (string|null);
-
-    /**
-     * Creates a Failure message from a plain object. Also converts values to their respective internal types.
-     * @param object Plain object
-     * @returns Failure
-     */
-    public static fromObject(object: { [k: string]: any }): Failure;
-
-    /**
-     * Creates a plain object from a Failure message. Also converts values to other types if specified.
-     * @param message Failure
-     * @param [options] Conversion options
-     * @returns Plain object
-     */
-    public static toObject(message: Failure, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-    /**
-     * Converts this Failure to JSON.
-     * @returns JSON object
-     */
-    public toJSON(): { [k: string]: any };
-}
-
-/** Properties of a Response. */
-export interface IResponse {
-
-    /** Response requestId */
-    requestId?: (number|null);
-
-    /** Response ok */
-    ok?: (IOk|null);
-
-    /** Response failure */
-    failure?: (IFailure|null);
-}
-
-/** Represents a Response. */
-export class Response implements IResponse {
-
-    /**
-     * Constructs a new Response.
-     * @param [properties] Properties to set
-     */
-    constructor(properties?: IResponse);
-
-    /** Response requestId. */
-    public requestId: number;
-
-    /** Response ok. */
-    public ok?: (IOk|null);
-
-    /** Response failure. */
-    public failure?: (IFailure|null);
-
-    /** Response message. */
-    public message?: ("ok"|"failure");
-
-    /**
-     * Creates a new Response instance using the specified properties.
-     * @param [properties] Properties to set
-     * @returns Response instance
-     */
-    public static create(properties?: IResponse): Response;
-
-    /**
-     * Encodes the specified Response message. Does not implicitly {@link Response.verify|verify} messages.
-     * @param message Response message or plain object to encode
-     * @param [writer] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(message: IResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-    /**
-     * Encodes the specified Response message, length delimited. Does not implicitly {@link Response.verify|verify} messages.
-     * @param message Response message or plain object to encode
-     * @param [writer] Writer to encode to
-     * @returns Writer
-     */
-    public static encodeDelimited(message: IResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-    /**
-     * Decodes a Response message from the specified reader or buffer.
-     * @param reader Reader or buffer to decode from
-     * @param [length] Message length if known beforehand
-     * @returns Response
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Response;
-
-    /**
-     * Decodes a Response message from the specified reader or buffer, length delimited.
-     * @param reader Reader or buffer to decode from
-     * @returns Response
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Response;
-
-    /**
-     * Verifies a Response message.
-     * @param message Plain object to verify
-     * @returns `null` if valid, otherwise the reason why it is not
-     */
-    public static verify(message: { [k: string]: any }): (string|null);
-
-    /**
-     * Creates a Response message from a plain object. Also converts values to their respective internal types.
-     * @param object Plain object
-     * @returns Response
-     */
-    public static fromObject(object: { [k: string]: any }): Response;
-
-    /**
-     * Creates a plain object from a Response message. Also converts values to other types if specified.
-     * @param message Response
-     * @param [options] Conversion options
-     * @returns Plain object
-     */
-    public static toObject(message: Response, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-    /**
-     * Converts this Response to JSON.
-     * @returns JSON object
-     */
-    public toJSON(): { [k: string]: any };
-}
-
 /** Properties of an Event. */
 export interface IEvent {
 
@@ -2002,6 +1612,588 @@ export class Event implements IEvent {
      * @returns JSON object
      */
     public toJSON(): { [k: string]: any };
+}
+
+/** Properties of an AudioRuntimeStatus. */
+export interface IAudioRuntimeStatus {
+}
+
+/** Represents an AudioRuntimeStatus. */
+export class AudioRuntimeStatus implements IAudioRuntimeStatus {
+
+    /**
+     * Constructs a new AudioRuntimeStatus.
+     * @param [properties] Properties to set
+     */
+    constructor(properties?: IAudioRuntimeStatus);
+
+    /**
+     * Creates a new AudioRuntimeStatus instance using the specified properties.
+     * @param [properties] Properties to set
+     * @returns AudioRuntimeStatus instance
+     */
+    public static create(properties?: IAudioRuntimeStatus): AudioRuntimeStatus;
+
+    /**
+     * Encodes the specified AudioRuntimeStatus message. Does not implicitly {@link AudioRuntimeStatus.verify|verify} messages.
+     * @param message AudioRuntimeStatus message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(message: IAudioRuntimeStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Encodes the specified AudioRuntimeStatus message, length delimited. Does not implicitly {@link AudioRuntimeStatus.verify|verify} messages.
+     * @param message AudioRuntimeStatus message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encodeDelimited(message: IAudioRuntimeStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Decodes an AudioRuntimeStatus message from the specified reader or buffer.
+     * @param reader Reader or buffer to decode from
+     * @param [length] Message length if known beforehand
+     * @returns AudioRuntimeStatus
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): AudioRuntimeStatus;
+
+    /**
+     * Decodes an AudioRuntimeStatus message from the specified reader or buffer, length delimited.
+     * @param reader Reader or buffer to decode from
+     * @returns AudioRuntimeStatus
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): AudioRuntimeStatus;
+
+    /**
+     * Verifies an AudioRuntimeStatus message.
+     * @param message Plain object to verify
+     * @returns `null` if valid, otherwise the reason why it is not
+     */
+    public static verify(message: { [k: string]: any }): (string|null);
+
+    /**
+     * Creates an AudioRuntimeStatus message from a plain object. Also converts values to their respective internal types.
+     * @param object Plain object
+     * @returns AudioRuntimeStatus
+     */
+    public static fromObject(object: { [k: string]: any }): AudioRuntimeStatus;
+
+    /**
+     * Creates a plain object from an AudioRuntimeStatus message. Also converts values to other types if specified.
+     * @param message AudioRuntimeStatus
+     * @param [options] Conversion options
+     * @returns Plain object
+     */
+    public static toObject(message: AudioRuntimeStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+    /**
+     * Converts this AudioRuntimeStatus to JSON.
+     * @returns JSON object
+     */
+    public toJSON(): { [k: string]: any };
+}
+
+/** Properties of a NoParameters. */
+export interface INoParameters {
+}
+
+/** Represents a NoParameters. */
+export class NoParameters implements INoParameters {
+
+    /**
+     * Constructs a new NoParameters.
+     * @param [properties] Properties to set
+     */
+    constructor(properties?: INoParameters);
+
+    /**
+     * Creates a new NoParameters instance using the specified properties.
+     * @param [properties] Properties to set
+     * @returns NoParameters instance
+     */
+    public static create(properties?: INoParameters): NoParameters;
+
+    /**
+     * Encodes the specified NoParameters message. Does not implicitly {@link NoParameters.verify|verify} messages.
+     * @param message NoParameters message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(message: INoParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Encodes the specified NoParameters message, length delimited. Does not implicitly {@link NoParameters.verify|verify} messages.
+     * @param message NoParameters message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encodeDelimited(message: INoParameters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Decodes a NoParameters message from the specified reader or buffer.
+     * @param reader Reader or buffer to decode from
+     * @param [length] Message length if known beforehand
+     * @returns NoParameters
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): NoParameters;
+
+    /**
+     * Decodes a NoParameters message from the specified reader or buffer, length delimited.
+     * @param reader Reader or buffer to decode from
+     * @returns NoParameters
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): NoParameters;
+
+    /**
+     * Verifies a NoParameters message.
+     * @param message Plain object to verify
+     * @returns `null` if valid, otherwise the reason why it is not
+     */
+    public static verify(message: { [k: string]: any }): (string|null);
+
+    /**
+     * Creates a NoParameters message from a plain object. Also converts values to their respective internal types.
+     * @param object Plain object
+     * @returns NoParameters
+     */
+    public static fromObject(object: { [k: string]: any }): NoParameters;
+
+    /**
+     * Creates a plain object from a NoParameters message. Also converts values to other types if specified.
+     * @param message NoParameters
+     * @param [options] Conversion options
+     * @returns Plain object
+     */
+    public static toObject(message: NoParameters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+    /**
+     * Converts this NoParameters to JSON.
+     * @returns JSON object
+     */
+    public toJSON(): { [k: string]: any };
+}
+
+/** Represents an AudioRuntime */
+export class AudioRuntime extends $protobuf.rpc.Service {
+
+    /**
+     * Constructs a new AudioRuntime service.
+     * @param rpcImpl RPC implementation
+     * @param [requestDelimited=false] Whether requests are length-delimited
+     * @param [responseDelimited=false] Whether responses are length-delimited
+     */
+    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+    /**
+     * Creates new AudioRuntime service using the specified rpc implementation.
+     * @param rpcImpl RPC implementation
+     * @param [requestDelimited=false] Whether requests are length-delimited
+     * @param [responseDelimited=false] Whether responses are length-delimited
+     * @returns RPC service. Useful where requests and/or responses are streamed.
+     */
+    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): AudioRuntime;
+
+    /**
+     * Calls UpdateSettings.
+     * @param request SetSettings message or plain object
+     * @param callback Node-style callback called with the error, if any, and AudioRuntimeStatus
+     */
+    public updateSettings(request: ISetSettings, callback: AudioRuntime.UpdateSettingsCallback): void;
+
+    /**
+     * Calls UpdateSettings.
+     * @param request SetSettings message or plain object
+     * @returns Promise
+     */
+    public updateSettings(request: ISetSettings): Promise<AudioRuntimeStatus>;
+
+    /**
+     * Calls Play.
+     * @param request NoParameters message or plain object
+     * @param callback Node-style callback called with the error, if any, and Event
+     */
+    public play(request: INoParameters, callback: AudioRuntime.PlayCallback): void;
+
+    /**
+     * Calls Play.
+     * @param request NoParameters message or plain object
+     * @returns Promise
+     */
+    public play(request: INoParameters): Promise<Event>;
+
+    /**
+     * Calls DoTerminate.
+     * @param request Terminate message or plain object
+     * @param callback Node-style callback called with the error, if any, and AudioRuntimeStatus
+     */
+    public doTerminate(request: ITerminate, callback: AudioRuntime.DoTerminateCallback): void;
+
+    /**
+     * Calls DoTerminate.
+     * @param request Terminate message or plain object
+     * @returns Promise
+     */
+    public doTerminate(request: ITerminate): Promise<AudioRuntimeStatus>;
+}
+
+export namespace AudioRuntime {
+
+    /**
+     * Callback as used by {@link AudioRuntime#updateSettings}.
+     * @param error Error, if any
+     * @param [response] AudioRuntimeStatus
+     */
+    type UpdateSettingsCallback = (error: (Error|null), response?: AudioRuntimeStatus) => void;
+
+    /**
+     * Callback as used by {@link AudioRuntime#play}.
+     * @param error Error, if any
+     * @param [response] Event
+     */
+    type PlayCallback = (error: (Error|null), response?: Event) => void;
+
+    /**
+     * Callback as used by {@link AudioRuntime#doTerminate}.
+     * @param error Error, if any
+     * @param [response] AudioRuntimeStatus
+     */
+    type DoTerminateCallback = (error: (Error|null), response?: AudioRuntimeStatus) => void;
+}
+
+/** Properties of a ChannelData. */
+export interface IChannelData {
+
+    /** ChannelData index */
+    index?: (number|null);
+
+    /** ChannelData data */
+    data?: (Uint8Array|null);
+}
+
+/** Represents a ChannelData. */
+export class ChannelData implements IChannelData {
+
+    /**
+     * Constructs a new ChannelData.
+     * @param [properties] Properties to set
+     */
+    constructor(properties?: IChannelData);
+
+    /** ChannelData index. */
+    public index: number;
+
+    /** ChannelData data. */
+    public data: Uint8Array;
+
+    /**
+     * Creates a new ChannelData instance using the specified properties.
+     * @param [properties] Properties to set
+     * @returns ChannelData instance
+     */
+    public static create(properties?: IChannelData): ChannelData;
+
+    /**
+     * Encodes the specified ChannelData message. Does not implicitly {@link ChannelData.verify|verify} messages.
+     * @param message ChannelData message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(message: IChannelData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Encodes the specified ChannelData message, length delimited. Does not implicitly {@link ChannelData.verify|verify} messages.
+     * @param message ChannelData message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encodeDelimited(message: IChannelData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Decodes a ChannelData message from the specified reader or buffer.
+     * @param reader Reader or buffer to decode from
+     * @param [length] Message length if known beforehand
+     * @returns ChannelData
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): ChannelData;
+
+    /**
+     * Decodes a ChannelData message from the specified reader or buffer, length delimited.
+     * @param reader Reader or buffer to decode from
+     * @returns ChannelData
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): ChannelData;
+
+    /**
+     * Verifies a ChannelData message.
+     * @param message Plain object to verify
+     * @returns `null` if valid, otherwise the reason why it is not
+     */
+    public static verify(message: { [k: string]: any }): (string|null);
+
+    /**
+     * Creates a ChannelData message from a plain object. Also converts values to their respective internal types.
+     * @param object Plain object
+     * @returns ChannelData
+     */
+    public static fromObject(object: { [k: string]: any }): ChannelData;
+
+    /**
+     * Creates a plain object from a ChannelData message. Also converts values to other types if specified.
+     * @param message ChannelData
+     * @param [options] Conversion options
+     * @returns Plain object
+     */
+    public static toObject(message: ChannelData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+    /**
+     * Converts this ChannelData to JSON.
+     * @returns JSON object
+     */
+    public toJSON(): { [k: string]: any };
+}
+
+/** Properties of an ExchangeChannels. */
+export interface IExchangeChannels {
+
+    /** ExchangeChannels channels */
+    channels?: (IChannelData[]|null);
+
+    /** ExchangeChannels requestChannels */
+    requestChannels?: (number[]|null);
+}
+
+/** Represents an ExchangeChannels. */
+export class ExchangeChannels implements IExchangeChannels {
+
+    /**
+     * Constructs a new ExchangeChannels.
+     * @param [properties] Properties to set
+     */
+    constructor(properties?: IExchangeChannels);
+
+    /** ExchangeChannels channels. */
+    public channels: IChannelData[];
+
+    /** ExchangeChannels requestChannels. */
+    public requestChannels: number[];
+
+    /**
+     * Creates a new ExchangeChannels instance using the specified properties.
+     * @param [properties] Properties to set
+     * @returns ExchangeChannels instance
+     */
+    public static create(properties?: IExchangeChannels): ExchangeChannels;
+
+    /**
+     * Encodes the specified ExchangeChannels message. Does not implicitly {@link ExchangeChannels.verify|verify} messages.
+     * @param message ExchangeChannels message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(message: IExchangeChannels, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Encodes the specified ExchangeChannels message, length delimited. Does not implicitly {@link ExchangeChannels.verify|verify} messages.
+     * @param message ExchangeChannels message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encodeDelimited(message: IExchangeChannels, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Decodes an ExchangeChannels message from the specified reader or buffer.
+     * @param reader Reader or buffer to decode from
+     * @param [length] Message length if known beforehand
+     * @returns ExchangeChannels
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): ExchangeChannels;
+
+    /**
+     * Decodes an ExchangeChannels message from the specified reader or buffer, length delimited.
+     * @param reader Reader or buffer to decode from
+     * @returns ExchangeChannels
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): ExchangeChannels;
+
+    /**
+     * Verifies an ExchangeChannels message.
+     * @param message Plain object to verify
+     * @returns `null` if valid, otherwise the reason why it is not
+     */
+    public static verify(message: { [k: string]: any }): (string|null);
+
+    /**
+     * Creates an ExchangeChannels message from a plain object. Also converts values to their respective internal types.
+     * @param object Plain object
+     * @returns ExchangeChannels
+     */
+    public static fromObject(object: { [k: string]: any }): ExchangeChannels;
+
+    /**
+     * Creates a plain object from an ExchangeChannels message. Also converts values to other types if specified.
+     * @param message ExchangeChannels
+     * @param [options] Conversion options
+     * @returns Plain object
+     */
+    public static toObject(message: ExchangeChannels, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+    /**
+     * Converts this ExchangeChannels to JSON.
+     * @returns JSON object
+     */
+    public toJSON(): { [k: string]: any };
+}
+
+/** Properties of a ProvideChannels. */
+export interface IProvideChannels {
+
+    /** ProvideChannels channels */
+    channels?: (IChannelData[]|null);
+}
+
+/** Represents a ProvideChannels. */
+export class ProvideChannels implements IProvideChannels {
+
+    /**
+     * Constructs a new ProvideChannels.
+     * @param [properties] Properties to set
+     */
+    constructor(properties?: IProvideChannels);
+
+    /** ProvideChannels channels. */
+    public channels: IChannelData[];
+
+    /**
+     * Creates a new ProvideChannels instance using the specified properties.
+     * @param [properties] Properties to set
+     * @returns ProvideChannels instance
+     */
+    public static create(properties?: IProvideChannels): ProvideChannels;
+
+    /**
+     * Encodes the specified ProvideChannels message. Does not implicitly {@link ProvideChannels.verify|verify} messages.
+     * @param message ProvideChannels message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(message: IProvideChannels, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Encodes the specified ProvideChannels message, length delimited. Does not implicitly {@link ProvideChannels.verify|verify} messages.
+     * @param message ProvideChannels message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encodeDelimited(message: IProvideChannels, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Decodes a ProvideChannels message from the specified reader or buffer.
+     * @param reader Reader or buffer to decode from
+     * @param [length] Message length if known beforehand
+     * @returns ProvideChannels
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): ProvideChannels;
+
+    /**
+     * Decodes a ProvideChannels message from the specified reader or buffer, length delimited.
+     * @param reader Reader or buffer to decode from
+     * @returns ProvideChannels
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): ProvideChannels;
+
+    /**
+     * Verifies a ProvideChannels message.
+     * @param message Plain object to verify
+     * @returns `null` if valid, otherwise the reason why it is not
+     */
+    public static verify(message: { [k: string]: any }): (string|null);
+
+    /**
+     * Creates a ProvideChannels message from a plain object. Also converts values to their respective internal types.
+     * @param object Plain object
+     * @returns ProvideChannels
+     */
+    public static fromObject(object: { [k: string]: any }): ProvideChannels;
+
+    /**
+     * Creates a plain object from a ProvideChannels message. Also converts values to other types if specified.
+     * @param message ProvideChannels
+     * @param [options] Conversion options
+     * @returns Plain object
+     */
+    public static toObject(message: ProvideChannels, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+    /**
+     * Converts this ProvideChannels to JSON.
+     * @returns JSON object
+     */
+    public toJSON(): { [k: string]: any };
+}
+
+/** Represents an AudioServer */
+export class AudioServer extends $protobuf.rpc.Service {
+
+    /**
+     * Constructs a new AudioServer service.
+     * @param rpcImpl RPC implementation
+     * @param [requestDelimited=false] Whether requests are length-delimited
+     * @param [responseDelimited=false] Whether responses are length-delimited
+     */
+    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+    /**
+     * Creates new AudioServer service using the specified rpc implementation.
+     * @param rpcImpl RPC implementation
+     * @param [requestDelimited=false] Whether requests are length-delimited
+     * @param [responseDelimited=false] Whether responses are length-delimited
+     * @returns RPC service. Useful where requests and/or responses are streamed.
+     */
+    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): AudioServer;
+
+    /**
+     * Calls exchange.
+     * @param request ExchangeChannels message or plain object
+     * @param callback Node-style callback called with the error, if any, and ProvideChannels
+     */
+    public exchange(request: IExchangeChannels, callback: AudioServer.exchangeCallback): void;
+
+    /**
+     * Calls exchange.
+     * @param request ExchangeChannels message or plain object
+     * @returns Promise
+     */
+    public exchange(request: IExchangeChannels): Promise<ProvideChannels>;
+}
+
+export namespace AudioServer {
+
+    /**
+     * Callback as used by {@link AudioServer#exchange}.
+     * @param error Error, if any
+     * @param [response] ProvideChannels
+     */
+    type exchangeCallback = (error: (Error|null), response?: ProvideChannels) => void;
 }
 
 /** Properties of a PublicRequest. */
@@ -2512,6 +2704,102 @@ export class PublicDownload implements IPublicDownload {
 
     /**
      * Converts this PublicDownload to JSON.
+     * @returns JSON object
+     */
+    public toJSON(): { [k: string]: any };
+}
+
+/** Properties of a Response. */
+export interface IResponse {
+
+    /** Response requestId */
+    requestId?: (number|null);
+
+    /** Response error */
+    error?: (string|null);
+}
+
+/** Represents a Response. */
+export class Response implements IResponse {
+
+    /**
+     * Constructs a new Response.
+     * @param [properties] Properties to set
+     */
+    constructor(properties?: IResponse);
+
+    /** Response requestId. */
+    public requestId: number;
+
+    /** Response error. */
+    public error: string;
+
+    /**
+     * Creates a new Response instance using the specified properties.
+     * @param [properties] Properties to set
+     * @returns Response instance
+     */
+    public static create(properties?: IResponse): Response;
+
+    /**
+     * Encodes the specified Response message. Does not implicitly {@link Response.verify|verify} messages.
+     * @param message Response message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(message: IResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Encodes the specified Response message, length delimited. Does not implicitly {@link Response.verify|verify} messages.
+     * @param message Response message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encodeDelimited(message: IResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Decodes a Response message from the specified reader or buffer.
+     * @param reader Reader or buffer to decode from
+     * @param [length] Message length if known beforehand
+     * @returns Response
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Response;
+
+    /**
+     * Decodes a Response message from the specified reader or buffer, length delimited.
+     * @param reader Reader or buffer to decode from
+     * @returns Response
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Response;
+
+    /**
+     * Verifies a Response message.
+     * @param message Plain object to verify
+     * @returns `null` if valid, otherwise the reason why it is not
+     */
+    public static verify(message: { [k: string]: any }): (string|null);
+
+    /**
+     * Creates a Response message from a plain object. Also converts values to their respective internal types.
+     * @param object Plain object
+     * @returns Response
+     */
+    public static fromObject(object: { [k: string]: any }): Response;
+
+    /**
+     * Creates a plain object from a Response message. Also converts values to other types if specified.
+     * @param message Response
+     * @param [options] Conversion options
+     * @returns Plain object
+     */
+    public static toObject(message: Response, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+    /**
+     * Converts this Response to JSON.
      * @returns JSON object
      */
     public toJSON(): { [k: string]: any };

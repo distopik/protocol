@@ -48,6 +48,11 @@ message PublicDownload {
     SetSettings settings = 3;
 }
 
+message Response {
+    uint32 requestId = 1;
+    string error = 2;
+}
+
 message PublicFrame {
     oneof frame {
         Event event = 1;
