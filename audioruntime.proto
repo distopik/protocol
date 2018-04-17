@@ -1,6 +1,6 @@
 syntax = "proto3";
 option java_package = "com.mixanalog.protocol";
-
+package mixanalog;
 
 /**
  * Sent to the engine by the controller. The output coding of the resulting
