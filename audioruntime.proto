@@ -1,6 +1,5 @@
 syntax = "proto3";
 option java_package = "com.mixanalog.protocol";
-package mixanalog;
 
 /**
  * Sent to the engine by the controller. The output coding of the resulting
@@ -190,7 +189,7 @@ message AudioReady {
     /**
      * Position in the media space
      */
-    int64 sampleTime = 4;
+    uint64 sampleTime = 4;
 
     /**
      * true when there are more buffers to follow, false otherwise
@@ -248,37 +247,22 @@ message Play {
     SetSettings settings = 5;
 }
 
-/* to the engine */
-message Request {
-    uint32 requestId = 1;
-
-    oneof message {
-        Play play = 2;
-        SetSettings setSettings = 3;
-        Terminate terminate = 4;
-    }
-}
-
-message Ok {
-}
-
-message Failure {
-    string reason = 1;
-}
-
-message Response {
-    uint32 requestId = 1;
-
-    oneof message {
-        Ok ok = 2;
-        Failure failure = 3;
-    }
-}
-
 message Event {
     oneof message {
         Ready ready = 1;
         AudioReady audioReady = 2;
         Terminated terminated = 3;
     }
+}
+
+message AudioRuntimeStatus {
+}
+
+message NoParameters {
+}
+
+service AudioRuntime {
+    rpc UpdateSettings (SetSettings) returns (AudioRuntimeStatus);
+    rpc Play (NoParameters) returns (stream Event);
+    rpc DoTerminate (Terminate) returns (AudioRuntimeStatus);
 }

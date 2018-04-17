@@ -1,7 +1,8 @@
 syntax = "proto3";
 import "audioruntime.proto";
+
 option java_package = "com.mixanalog.protocol";
-package mixanalog;
+
 
 message PublicRequest {
     uint32 requestId = 1;

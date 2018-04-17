@@ -1,6 +1,5 @@
 syntax = "proto3";
 option java_package = "com.mixanalog.protocol";
-package mixanalog;
 
 message ChannelData {
     uint32 index = 1;
