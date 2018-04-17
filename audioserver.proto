@@ -1,4 +1,5 @@
 syntax = "proto3";
+option java_package = "com.mixanalog.protocol";
 
 message ChannelData {
     uint32 index = 1;
@@ -6,12 +7,12 @@ message ChannelData {
 }
 
 message ExchangeChannels {
-    repeated ChannelData channels;
-    repeated uint32 requestChannels;
+    repeated ChannelData channels = 1;
+    repeated uint32 requestChannels = 2;
 }
 
 message ProvideChannels {
-    repeated ChannelData channels;
+    repeated ChannelData channels = 1;
 }
 
 service AudioServer {
