@@ -23,6 +23,7 @@ message PublicPlay {
     string outputCodingPreset = 2;
     SetSettings settings = 3;
     uint32 sampleRate = 4;
+    uint32 latencyMultiplier = 5;
 }
 
 message PublicInput {

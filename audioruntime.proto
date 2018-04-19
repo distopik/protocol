@@ -247,11 +247,19 @@ message Play {
     SetSettings settings = 5;
 }
 
+message ErrorOrWarning {
+    oneof message {
+        string warning = 1;
+        string error = 2;
+    }
+}
+
 message Event {
     oneof message {
         Ready ready = 1;
         AudioReady audioReady = 2;
         Terminated terminated = 3;
+        ErrorOrWarning errorOrWarning = 4;
     }
 }
 

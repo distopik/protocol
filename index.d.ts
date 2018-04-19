@@ -1509,6 +1509,105 @@ export class Play implements IPlay {
     public toJSON(): { [k: string]: any };
 }
 
+/** Properties of an ErrorOrWarning. */
+export interface IErrorOrWarning {
+
+    /** ErrorOrWarning warning */
+    warning?: (string|null);
+
+    /** ErrorOrWarning error */
+    error?: (string|null);
+}
+
+/** Represents an ErrorOrWarning. */
+export class ErrorOrWarning implements IErrorOrWarning {
+
+    /**
+     * Constructs a new ErrorOrWarning.
+     * @param [properties] Properties to set
+     */
+    constructor(properties?: IErrorOrWarning);
+
+    /** ErrorOrWarning warning. */
+    public warning: string;
+
+    /** ErrorOrWarning error. */
+    public error: string;
+
+    /** ErrorOrWarning message. */
+    public message?: ("warning"|"error");
+
+    /**
+     * Creates a new ErrorOrWarning instance using the specified properties.
+     * @param [properties] Properties to set
+     * @returns ErrorOrWarning instance
+     */
+    public static create(properties?: IErrorOrWarning): ErrorOrWarning;
+
+    /**
+     * Encodes the specified ErrorOrWarning message. Does not implicitly {@link ErrorOrWarning.verify|verify} messages.
+     * @param message ErrorOrWarning message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(message: IErrorOrWarning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Encodes the specified ErrorOrWarning message, length delimited. Does not implicitly {@link ErrorOrWarning.verify|verify} messages.
+     * @param message ErrorOrWarning message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encodeDelimited(message: IErrorOrWarning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Decodes an ErrorOrWarning message from the specified reader or buffer.
+     * @param reader Reader or buffer to decode from
+     * @param [length] Message length if known beforehand
+     * @returns ErrorOrWarning
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): ErrorOrWarning;
+
+    /**
+     * Decodes an ErrorOrWarning message from the specified reader or buffer, length delimited.
+     * @param reader Reader or buffer to decode from
+     * @returns ErrorOrWarning
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): ErrorOrWarning;
+
+    /**
+     * Verifies an ErrorOrWarning message.
+     * @param message Plain object to verify
+     * @returns `null` if valid, otherwise the reason why it is not
+     */
+    public static verify(message: { [k: string]: any }): (string|null);
+
+    /**
+     * Creates an ErrorOrWarning message from a plain object. Also converts values to their respective internal types.
+     * @param object Plain object
+     * @returns ErrorOrWarning
+     */
+    public static fromObject(object: { [k: string]: any }): ErrorOrWarning;
+
+    /**
+     * Creates a plain object from an ErrorOrWarning message. Also converts values to other types if specified.
+     * @param message ErrorOrWarning
+     * @param [options] Conversion options
+     * @returns Plain object
+     */
+    public static toObject(message: ErrorOrWarning, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+    /**
+     * Converts this ErrorOrWarning to JSON.
+     * @returns JSON object
+     */
+    public toJSON(): { [k: string]: any };
+}
+
 /** Properties of an Event. */
 export interface IEvent {
 
@@ -1520,6 +1619,9 @@ export interface IEvent {
 
     /** Event terminated */
     terminated?: (ITerminated|null);
+
+    /** Event errorOrWarning */
+    errorOrWarning?: (IErrorOrWarning|null);
 }
 
 /** Represents an Event. */
@@ -1540,8 +1642,11 @@ export class Event implements IEvent {
     /** Event terminated. */
     public terminated?: (ITerminated|null);
 
+    /** Event errorOrWarning. */
+    public errorOrWarning?: (IErrorOrWarning|null);
+
     /** Event message. */
-    public message?: ("ready"|"audioReady"|"terminated");
+    public message?: ("ready"|"audioReady"|"terminated"|"errorOrWarning");
 
     /**
      * Creates a new Event instance using the specified properties.
@@ -2411,6 +2516,9 @@ export interface IPublicPlay {
 
     /** PublicPlay sampleRate */
     sampleRate?: (number|null);
+
+    /** PublicPlay latencyMultiplier */
+    latencyMultiplier?: (number|null);
 }
 
 /** Represents a PublicPlay. */
@@ -2433,6 +2541,9 @@ export class PublicPlay implements IPublicPlay {
 
     /** PublicPlay sampleRate. */
     public sampleRate: number;
+
+    /** PublicPlay latencyMultiplier. */
+    public latencyMultiplier: number;
 
     /**
      * Creates a new PublicPlay instance using the specified properties.
