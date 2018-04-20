@@ -5317,7 +5317,7 @@ $root.PublicRequest = (function() {
      * Properties of a PublicRequest.
      * @exports IPublicRequest
      * @interface IPublicRequest
-     * @property {number|null} [requestId] PublicRequest requestId
+     * @property {string|null} [requestId] PublicRequest requestId
      * @property {IPublicPlay|null} [play] PublicRequest play
      * @property {IPublicStop|null} [stop] PublicRequest stop
      * @property {ISetSettings|null} [setSettings] PublicRequest setSettings
@@ -5341,11 +5341,11 @@ $root.PublicRequest = (function() {
 
     /**
      * PublicRequest requestId.
-     * @member {number} requestId
+     * @member {string} requestId
      * @memberof PublicRequest
      * @instance
      */
-    PublicRequest.prototype.requestId = 0;
+    PublicRequest.prototype.requestId = "";
 
     /**
      * PublicRequest play.
@@ -5418,7 +5418,7 @@ $root.PublicRequest = (function() {
         if (!writer)
             writer = $Writer.create();
         if (message.requestId != null && message.hasOwnProperty("requestId"))
-            writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.requestId);
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.requestId);
         if (message.play != null && message.hasOwnProperty("play"))
             $root.PublicPlay.encode(message.play, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
         if (message.stop != null && message.hasOwnProperty("stop"))
@@ -5462,7 +5462,7 @@ $root.PublicRequest = (function() {
             var tag = reader.uint32();
             switch (tag >>> 3) {
             case 1:
-                message.requestId = reader.uint32();
+                message.requestId = reader.string();
                 break;
             case 2:
                 message.play = $root.PublicPlay.decode(reader, reader.uint32());
@@ -5513,8 +5513,8 @@ $root.PublicRequest = (function() {
             return "object expected";
         var properties = {};
         if (message.requestId != null && message.hasOwnProperty("requestId"))
-            if (!$util.isInteger(message.requestId))
-                return "requestId: integer expected";
+            if (!$util.isString(message.requestId))
+                return "requestId: string expected";
         if (message.play != null && message.hasOwnProperty("play")) {
             properties.message = 1;
             {
@@ -5569,7 +5569,7 @@ $root.PublicRequest = (function() {
             return object;
         var message = new $root.PublicRequest();
         if (object.requestId != null)
-            message.requestId = object.requestId >>> 0;
+            message.requestId = String(object.requestId);
         if (object.play != null) {
             if (typeof object.play !== "object")
                 throw TypeError(".PublicRequest.play: object expected");
@@ -5607,7 +5607,7 @@ $root.PublicRequest = (function() {
             options = {};
         var object = {};
         if (options.defaults)
-            object.requestId = 0;
+            object.requestId = "";
         if (message.requestId != null && message.hasOwnProperty("requestId"))
             object.requestId = message.requestId;
         if (message.play != null && message.hasOwnProperty("play")) {
@@ -6621,7 +6621,7 @@ $root.Response = (function() {
      * Properties of a Response.
      * @exports IResponse
      * @interface IResponse
-     * @property {number|null} [requestId] Response requestId
+     * @property {string|null} [requestId] Response requestId
      * @property {string|null} [error] Response error
      */
 
@@ -6642,11 +6642,11 @@ $root.Response = (function() {
 
     /**
      * Response requestId.
-     * @member {number} requestId
+     * @member {string} requestId
      * @memberof Response
      * @instance
      */
-    Response.prototype.requestId = 0;
+    Response.prototype.requestId = "";
 
     /**
      * Response error.
@@ -6681,7 +6681,7 @@ $root.Response = (function() {
         if (!writer)
             writer = $Writer.create();
         if (message.requestId != null && message.hasOwnProperty("requestId"))
-            writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.requestId);
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.requestId);
         if (message.error != null && message.hasOwnProperty("error"))
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.error);
         return writer;
@@ -6719,7 +6719,7 @@ $root.Response = (function() {
             var tag = reader.uint32();
             switch (tag >>> 3) {
             case 1:
-                message.requestId = reader.uint32();
+                message.requestId = reader.string();
                 break;
             case 2:
                 message.error = reader.string();
@@ -6760,8 +6760,8 @@ $root.Response = (function() {
         if (typeof message !== "object" || message === null)
             return "object expected";
         if (message.requestId != null && message.hasOwnProperty("requestId"))
-            if (!$util.isInteger(message.requestId))
-                return "requestId: integer expected";
+            if (!$util.isString(message.requestId))
+                return "requestId: string expected";
         if (message.error != null && message.hasOwnProperty("error"))
             if (!$util.isString(message.error))
                 return "error: string expected";
@@ -6781,7 +6781,7 @@ $root.Response = (function() {
             return object;
         var message = new $root.Response();
         if (object.requestId != null)
-            message.requestId = object.requestId >>> 0;
+            message.requestId = String(object.requestId);
         if (object.error != null)
             message.error = String(object.error);
         return message;
@@ -6801,7 +6801,7 @@ $root.Response = (function() {
             options = {};
         var object = {};
         if (options.defaults) {
-            object.requestId = 0;
+            object.requestId = "";
             object.error = "";
         }
         if (message.requestId != null && message.hasOwnProperty("requestId"))

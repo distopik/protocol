@@ -2305,7 +2305,7 @@ export namespace AudioServer {
 export interface IPublicRequest {
 
     /** PublicRequest requestId */
-    requestId?: (number|null);
+    requestId?: (string|null);
 
     /** PublicRequest play */
     play?: (IPublicPlay|null);
@@ -2330,7 +2330,7 @@ export class PublicRequest implements IPublicRequest {
     constructor(properties?: IPublicRequest);
 
     /** PublicRequest requestId. */
-    public requestId: number;
+    public requestId: string;
 
     /** PublicRequest play. */
     public play?: (IPublicPlay|null);
@@ -2824,7 +2824,7 @@ export class PublicDownload implements IPublicDownload {
 export interface IResponse {
 
     /** Response requestId */
-    requestId?: (number|null);
+    requestId?: (string|null);
 
     /** Response error */
     error?: (string|null);
@@ -2840,7 +2840,7 @@ export class Response implements IResponse {
     constructor(properties?: IResponse);
 
     /** Response requestId. */
-    public requestId: number;
+    public requestId: string;
 
     /** Response error. */
     public error: string;

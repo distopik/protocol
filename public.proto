@@ -5,7 +5,7 @@ option java_package = "com.mixanalog.protocol";
 
 
 message PublicRequest {
-    uint32 requestId = 1;
+    string requestId = 1;
 
     oneof message {
         PublicPlay play = 2;
@@ -50,7 +50,7 @@ message PublicDownload {
 }
 
 message Response {
-    uint32 requestId = 1;
+    string requestId = 1;
     string error = 2;
 }
 
