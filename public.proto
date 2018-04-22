@@ -5,7 +5,7 @@ option java_package = "com.mixanalog.protocol";
 
 
 message PublicRequest {
-    uint32 requestId = 1;
+    string requestId = 1;
 
     oneof message {
         PublicPlay play = 2;
@@ -23,6 +23,7 @@ message PublicPlay {
     string outputCodingPreset = 2;
     SetSettings settings = 3;
     uint32 sampleRate = 4;
+    uint32 latencyMultiplier = 5;
 }
 
 message PublicInput {
@@ -49,7 +50,7 @@ message PublicDownload {
 }
 
 message Response {
-    uint32 requestId = 1;
+    string requestId = 1;
     string error = 2;
 }
 

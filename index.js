@@ -3567,6 +3567,239 @@ $root.Play = (function() {
     return Play;
 })();
 
+$root.ErrorOrWarning = (function() {
+
+    /**
+     * Properties of an ErrorOrWarning.
+     * @exports IErrorOrWarning
+     * @interface IErrorOrWarning
+     * @property {string|null} [warning] ErrorOrWarning warning
+     * @property {string|null} [error] ErrorOrWarning error
+     */
+
+    /**
+     * Constructs a new ErrorOrWarning.
+     * @exports ErrorOrWarning
+     * @classdesc Represents an ErrorOrWarning.
+     * @implements IErrorOrWarning
+     * @constructor
+     * @param {IErrorOrWarning=} [properties] Properties to set
+     */
+    function ErrorOrWarning(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * ErrorOrWarning warning.
+     * @member {string} warning
+     * @memberof ErrorOrWarning
+     * @instance
+     */
+    ErrorOrWarning.prototype.warning = "";
+
+    /**
+     * ErrorOrWarning error.
+     * @member {string} error
+     * @memberof ErrorOrWarning
+     * @instance
+     */
+    ErrorOrWarning.prototype.error = "";
+
+    // OneOf field names bound to virtual getters and setters
+    var $oneOfFields;
+
+    /**
+     * ErrorOrWarning message.
+     * @member {"warning"|"error"|undefined} message
+     * @memberof ErrorOrWarning
+     * @instance
+     */
+    Object.defineProperty(ErrorOrWarning.prototype, "message", {
+        get: $util.oneOfGetter($oneOfFields = ["warning", "error"]),
+        set: $util.oneOfSetter($oneOfFields)
+    });
+
+    /**
+     * Creates a new ErrorOrWarning instance using the specified properties.
+     * @function create
+     * @memberof ErrorOrWarning
+     * @static
+     * @param {IErrorOrWarning=} [properties] Properties to set
+     * @returns {ErrorOrWarning} ErrorOrWarning instance
+     */
+    ErrorOrWarning.create = function create(properties) {
+        return new ErrorOrWarning(properties);
+    };
+
+    /**
+     * Encodes the specified ErrorOrWarning message. Does not implicitly {@link ErrorOrWarning.verify|verify} messages.
+     * @function encode
+     * @memberof ErrorOrWarning
+     * @static
+     * @param {IErrorOrWarning} message ErrorOrWarning message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    ErrorOrWarning.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.warning != null && message.hasOwnProperty("warning"))
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.warning);
+        if (message.error != null && message.hasOwnProperty("error"))
+            writer.uint32(/* id 2, wireType 2 =*/18).string(message.error);
+        return writer;
+    };
+
+    /**
+     * Encodes the specified ErrorOrWarning message, length delimited. Does not implicitly {@link ErrorOrWarning.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof ErrorOrWarning
+     * @static
+     * @param {IErrorOrWarning} message ErrorOrWarning message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    ErrorOrWarning.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes an ErrorOrWarning message from the specified reader or buffer.
+     * @function decode
+     * @memberof ErrorOrWarning
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {ErrorOrWarning} ErrorOrWarning
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    ErrorOrWarning.decode = function decode(reader, length) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ErrorOrWarning();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            switch (tag >>> 3) {
+            case 1:
+                message.warning = reader.string();
+                break;
+            case 2:
+                message.error = reader.string();
+                break;
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes an ErrorOrWarning message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof ErrorOrWarning
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {ErrorOrWarning} ErrorOrWarning
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    ErrorOrWarning.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies an ErrorOrWarning message.
+     * @function verify
+     * @memberof ErrorOrWarning
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    ErrorOrWarning.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        var properties = {};
+        if (message.warning != null && message.hasOwnProperty("warning")) {
+            properties.message = 1;
+            if (!$util.isString(message.warning))
+                return "warning: string expected";
+        }
+        if (message.error != null && message.hasOwnProperty("error")) {
+            if (properties.message === 1)
+                return "message: multiple values";
+            properties.message = 1;
+            if (!$util.isString(message.error))
+                return "error: string expected";
+        }
+        return null;
+    };
+
+    /**
+     * Creates an ErrorOrWarning message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof ErrorOrWarning
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {ErrorOrWarning} ErrorOrWarning
+     */
+    ErrorOrWarning.fromObject = function fromObject(object) {
+        if (object instanceof $root.ErrorOrWarning)
+            return object;
+        var message = new $root.ErrorOrWarning();
+        if (object.warning != null)
+            message.warning = String(object.warning);
+        if (object.error != null)
+            message.error = String(object.error);
+        return message;
+    };
+
+    /**
+     * Creates a plain object from an ErrorOrWarning message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof ErrorOrWarning
+     * @static
+     * @param {ErrorOrWarning} message ErrorOrWarning
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    ErrorOrWarning.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (message.warning != null && message.hasOwnProperty("warning")) {
+            object.warning = message.warning;
+            if (options.oneofs)
+                object.message = "warning";
+        }
+        if (message.error != null && message.hasOwnProperty("error")) {
+            object.error = message.error;
+            if (options.oneofs)
+                object.message = "error";
+        }
+        return object;
+    };
+
+    /**
+     * Converts this ErrorOrWarning to JSON.
+     * @function toJSON
+     * @memberof ErrorOrWarning
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    ErrorOrWarning.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    return ErrorOrWarning;
+})();
+
 $root.Event = (function() {
 
     /**
@@ -3576,6 +3809,7 @@ $root.Event = (function() {
      * @property {IReady|null} [ready] Event ready
      * @property {IAudioReady|null} [audioReady] Event audioReady
      * @property {ITerminated|null} [terminated] Event terminated
+     * @property {IErrorOrWarning|null} [errorOrWarning] Event errorOrWarning
      */
 
     /**
@@ -3617,17 +3851,25 @@ $root.Event = (function() {
      */
     Event.prototype.terminated = null;
 
+    /**
+     * Event errorOrWarning.
+     * @member {IErrorOrWarning|null|undefined} errorOrWarning
+     * @memberof Event
+     * @instance
+     */
+    Event.prototype.errorOrWarning = null;
+
     // OneOf field names bound to virtual getters and setters
     var $oneOfFields;
 
     /**
      * Event message.
-     * @member {"ready"|"audioReady"|"terminated"|undefined} message
+     * @member {"ready"|"audioReady"|"terminated"|"errorOrWarning"|undefined} message
      * @memberof Event
      * @instance
      */
     Object.defineProperty(Event.prototype, "message", {
-        get: $util.oneOfGetter($oneOfFields = ["ready", "audioReady", "terminated"]),
+        get: $util.oneOfGetter($oneOfFields = ["ready", "audioReady", "terminated", "errorOrWarning"]),
         set: $util.oneOfSetter($oneOfFields)
     });
 
@@ -3661,6 +3903,8 @@ $root.Event = (function() {
             $root.AudioReady.encode(message.audioReady, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
         if (message.terminated != null && message.hasOwnProperty("terminated"))
             $root.Terminated.encode(message.terminated, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+        if (message.errorOrWarning != null && message.hasOwnProperty("errorOrWarning"))
+            $root.ErrorOrWarning.encode(message.errorOrWarning, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
         return writer;
     };
 
@@ -3703,6 +3947,9 @@ $root.Event = (function() {
                 break;
             case 3:
                 message.terminated = $root.Terminated.decode(reader, reader.uint32());
+                break;
+            case 4:
+                message.errorOrWarning = $root.ErrorOrWarning.decode(reader, reader.uint32());
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -3768,6 +4015,16 @@ $root.Event = (function() {
                     return "terminated." + error;
             }
         }
+        if (message.errorOrWarning != null && message.hasOwnProperty("errorOrWarning")) {
+            if (properties.message === 1)
+                return "message: multiple values";
+            properties.message = 1;
+            {
+                var error = $root.ErrorOrWarning.verify(message.errorOrWarning);
+                if (error)
+                    return "errorOrWarning." + error;
+            }
+        }
         return null;
     };
 
@@ -3797,6 +4054,11 @@ $root.Event = (function() {
             if (typeof object.terminated !== "object")
                 throw TypeError(".Event.terminated: object expected");
             message.terminated = $root.Terminated.fromObject(object.terminated);
+        }
+        if (object.errorOrWarning != null) {
+            if (typeof object.errorOrWarning !== "object")
+                throw TypeError(".Event.errorOrWarning: object expected");
+            message.errorOrWarning = $root.ErrorOrWarning.fromObject(object.errorOrWarning);
         }
         return message;
     };
@@ -3828,6 +4090,11 @@ $root.Event = (function() {
             object.terminated = $root.Terminated.toObject(message.terminated, options);
             if (options.oneofs)
                 object.message = "terminated";
+        }
+        if (message.errorOrWarning != null && message.hasOwnProperty("errorOrWarning")) {
+            object.errorOrWarning = $root.ErrorOrWarning.toObject(message.errorOrWarning, options);
+            if (options.oneofs)
+                object.message = "errorOrWarning";
         }
         return object;
     };
@@ -5050,7 +5317,7 @@ $root.PublicRequest = (function() {
      * Properties of a PublicRequest.
      * @exports IPublicRequest
      * @interface IPublicRequest
-     * @property {number|null} [requestId] PublicRequest requestId
+     * @property {string|null} [requestId] PublicRequest requestId
      * @property {IPublicPlay|null} [play] PublicRequest play
      * @property {IPublicStop|null} [stop] PublicRequest stop
      * @property {ISetSettings|null} [setSettings] PublicRequest setSettings
@@ -5074,11 +5341,11 @@ $root.PublicRequest = (function() {
 
     /**
      * PublicRequest requestId.
-     * @member {number} requestId
+     * @member {string} requestId
      * @memberof PublicRequest
      * @instance
      */
-    PublicRequest.prototype.requestId = 0;
+    PublicRequest.prototype.requestId = "";
 
     /**
      * PublicRequest play.
@@ -5151,7 +5418,7 @@ $root.PublicRequest = (function() {
         if (!writer)
             writer = $Writer.create();
         if (message.requestId != null && message.hasOwnProperty("requestId"))
-            writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.requestId);
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.requestId);
         if (message.play != null && message.hasOwnProperty("play"))
             $root.PublicPlay.encode(message.play, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
         if (message.stop != null && message.hasOwnProperty("stop"))
@@ -5195,7 +5462,7 @@ $root.PublicRequest = (function() {
             var tag = reader.uint32();
             switch (tag >>> 3) {
             case 1:
-                message.requestId = reader.uint32();
+                message.requestId = reader.string();
                 break;
             case 2:
                 message.play = $root.PublicPlay.decode(reader, reader.uint32());
@@ -5246,8 +5513,8 @@ $root.PublicRequest = (function() {
             return "object expected";
         var properties = {};
         if (message.requestId != null && message.hasOwnProperty("requestId"))
-            if (!$util.isInteger(message.requestId))
-                return "requestId: integer expected";
+            if (!$util.isString(message.requestId))
+                return "requestId: string expected";
         if (message.play != null && message.hasOwnProperty("play")) {
             properties.message = 1;
             {
@@ -5302,7 +5569,7 @@ $root.PublicRequest = (function() {
             return object;
         var message = new $root.PublicRequest();
         if (object.requestId != null)
-            message.requestId = object.requestId >>> 0;
+            message.requestId = String(object.requestId);
         if (object.play != null) {
             if (typeof object.play !== "object")
                 throw TypeError(".PublicRequest.play: object expected");
@@ -5340,7 +5607,7 @@ $root.PublicRequest = (function() {
             options = {};
         var object = {};
         if (options.defaults)
-            object.requestId = 0;
+            object.requestId = "";
         if (message.requestId != null && message.hasOwnProperty("requestId"))
             object.requestId = message.requestId;
         if (message.play != null && message.hasOwnProperty("play")) {
@@ -5550,6 +5817,7 @@ $root.PublicPlay = (function() {
      * @property {string|null} [outputCodingPreset] PublicPlay outputCodingPreset
      * @property {ISetSettings|null} [settings] PublicPlay settings
      * @property {number|null} [sampleRate] PublicPlay sampleRate
+     * @property {number|null} [latencyMultiplier] PublicPlay latencyMultiplier
      */
 
     /**
@@ -5601,6 +5869,14 @@ $root.PublicPlay = (function() {
     PublicPlay.prototype.sampleRate = 0;
 
     /**
+     * PublicPlay latencyMultiplier.
+     * @member {number} latencyMultiplier
+     * @memberof PublicPlay
+     * @instance
+     */
+    PublicPlay.prototype.latencyMultiplier = 0;
+
+    /**
      * Creates a new PublicPlay instance using the specified properties.
      * @function create
      * @memberof PublicPlay
@@ -5635,6 +5911,8 @@ $root.PublicPlay = (function() {
             $root.SetSettings.encode(message.settings, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
         if (message.sampleRate != null && message.hasOwnProperty("sampleRate"))
             writer.uint32(/* id 4, wireType 0 =*/32).uint32(message.sampleRate);
+        if (message.latencyMultiplier != null && message.hasOwnProperty("latencyMultiplier"))
+            writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.latencyMultiplier);
         return writer;
     };
 
@@ -5685,6 +5963,9 @@ $root.PublicPlay = (function() {
                 break;
             case 4:
                 message.sampleRate = reader.uint32();
+                break;
+            case 5:
+                message.latencyMultiplier = reader.uint32();
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -5742,6 +6023,9 @@ $root.PublicPlay = (function() {
         if (message.sampleRate != null && message.hasOwnProperty("sampleRate"))
             if (!$util.isInteger(message.sampleRate))
                 return "sampleRate: integer expected";
+        if (message.latencyMultiplier != null && message.hasOwnProperty("latencyMultiplier"))
+            if (!$util.isInteger(message.latencyMultiplier))
+                return "latencyMultiplier: integer expected";
         return null;
     };
 
@@ -5776,6 +6060,8 @@ $root.PublicPlay = (function() {
         }
         if (object.sampleRate != null)
             message.sampleRate = object.sampleRate >>> 0;
+        if (object.latencyMultiplier != null)
+            message.latencyMultiplier = object.latencyMultiplier >>> 0;
         return message;
     };
 
@@ -5798,6 +6084,7 @@ $root.PublicPlay = (function() {
             object.outputCodingPreset = "";
             object.settings = null;
             object.sampleRate = 0;
+            object.latencyMultiplier = 0;
         }
         var keys2;
         if (message.inputs && (keys2 = Object.keys(message.inputs)).length) {
@@ -5811,6 +6098,8 @@ $root.PublicPlay = (function() {
             object.settings = $root.SetSettings.toObject(message.settings, options);
         if (message.sampleRate != null && message.hasOwnProperty("sampleRate"))
             object.sampleRate = message.sampleRate;
+        if (message.latencyMultiplier != null && message.hasOwnProperty("latencyMultiplier"))
+            object.latencyMultiplier = message.latencyMultiplier;
         return object;
     };
 
@@ -6332,7 +6621,7 @@ $root.Response = (function() {
      * Properties of a Response.
      * @exports IResponse
      * @interface IResponse
-     * @property {number|null} [requestId] Response requestId
+     * @property {string|null} [requestId] Response requestId
      * @property {string|null} [error] Response error
      */
 
@@ -6353,11 +6642,11 @@ $root.Response = (function() {
 
     /**
      * Response requestId.
-     * @member {number} requestId
+     * @member {string} requestId
      * @memberof Response
      * @instance
      */
-    Response.prototype.requestId = 0;
+    Response.prototype.requestId = "";
 
     /**
      * Response error.
@@ -6392,7 +6681,7 @@ $root.Response = (function() {
         if (!writer)
             writer = $Writer.create();
         if (message.requestId != null && message.hasOwnProperty("requestId"))
-            writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.requestId);
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.requestId);
         if (message.error != null && message.hasOwnProperty("error"))
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.error);
         return writer;
@@ -6430,7 +6719,7 @@ $root.Response = (function() {
             var tag = reader.uint32();
             switch (tag >>> 3) {
             case 1:
-                message.requestId = reader.uint32();
+                message.requestId = reader.string();
                 break;
             case 2:
                 message.error = reader.string();
@@ -6471,8 +6760,8 @@ $root.Response = (function() {
         if (typeof message !== "object" || message === null)
             return "object expected";
         if (message.requestId != null && message.hasOwnProperty("requestId"))
-            if (!$util.isInteger(message.requestId))
-                return "requestId: integer expected";
+            if (!$util.isString(message.requestId))
+                return "requestId: string expected";
         if (message.error != null && message.hasOwnProperty("error"))
             if (!$util.isString(message.error))
                 return "error: string expected";
@@ -6492,7 +6781,7 @@ $root.Response = (function() {
             return object;
         var message = new $root.Response();
         if (object.requestId != null)
-            message.requestId = object.requestId >>> 0;
+            message.requestId = String(object.requestId);
         if (object.error != null)
             message.error = String(object.error);
         return message;
@@ -6512,7 +6801,7 @@ $root.Response = (function() {
             options = {};
         var object = {};
         if (options.defaults) {
-            object.requestId = 0;
+            object.requestId = "";
             object.error = "";
         }
         if (message.requestId != null && message.hasOwnProperty("requestId"))
