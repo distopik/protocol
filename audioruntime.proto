@@ -255,6 +255,20 @@ message Event {
     }
 }
 
+message Request {
+    string requestId = 1;
+    oneof command {
+        Play play = 2;
+        Terminate terminate = 3;
+        SetSettings setSettings = 4;
+    }
+}
+
+message Response {
+    string requestId = 1;
+    string error = 2;
+}
+
 message AudioRuntimeStatus {
 }
 
