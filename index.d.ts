@@ -597,13 +597,13 @@ export class Input implements IInput {
 export interface IMeasurement {
 
     /** When in time relative to the source has this happened? */
-    sourceTime?: (number|null);
+    sampleRate?: (number|null);
 
     /** name of the measurement */
     name?: (string|null);
 
-    /** The actual measurement */
-    measurement?: (number|null);
+    /** The actual measurements */
+    measurement?: (number[]|null);
 }
 
 /**
@@ -619,13 +619,13 @@ export class Measurement implements IMeasurement {
     constructor(properties?: IMeasurement);
 
     /** When in time relative to the source has this happened? */
-    public sourceTime: number;
+    public sampleRate: number;
 
     /** name of the measurement */
     public name: string;
 
-    /** The actual measurement */
-    public measurement: number;
+    /** The actual measurements */
+    public measurement: number[];
 
     /**
      * Creates a new Measurement instance using the specified properties.

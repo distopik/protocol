@@ -1448,9 +1448,9 @@ $root.Measurement = (function() {
      * Properties of a Measurement.
      * @exports IMeasurement
      * @interface IMeasurement
-     * @property {number|null} [sourceTime] When in time relative to the source has this happened?
+     * @property {number|null} [sampleRate] When in time relative to the source has this happened?
      * @property {string|null} [name] name of the measurement
-     * @property {number|null} [measurement] The actual measurement
+     * @property {Array.<number>|null} [measurement] The actual measurements
      */
 
     /**
@@ -1463,6 +1463,7 @@ $root.Measurement = (function() {
      * @param {IMeasurement=} [properties] Properties to set
      */
     function Measurement(properties) {
+        this.measurement = [];
         if (properties)
             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                 if (properties[keys[i]] != null)
@@ -1471,11 +1472,11 @@ $root.Measurement = (function() {
 
     /**
      * When in time relative to the source has this happened?
-     * @member {number} sourceTime
+     * @member {number} sampleRate
      * @memberof Measurement
      * @instance
      */
-    Measurement.prototype.sourceTime = 0;
+    Measurement.prototype.sampleRate = 0;
 
     /**
      * name of the measurement
@@ -1486,12 +1487,12 @@ $root.Measurement = (function() {
     Measurement.prototype.name = "";
 
     /**
-     * The actual measurement
-     * @member {number} measurement
+     * The actual measurements
+     * @member {Array.<number>} measurement
      * @memberof Measurement
      * @instance
      */
-    Measurement.prototype.measurement = 0;
+    Measurement.prototype.measurement = $util.emptyArray;
 
     /**
      * Creates a new Measurement instance using the specified properties.
@@ -1517,12 +1518,16 @@ $root.Measurement = (function() {
     Measurement.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
-        if (message.sourceTime != null && message.hasOwnProperty("sourceTime"))
-            writer.uint32(/* id 1, wireType 1 =*/9).double(message.sourceTime);
+        if (message.sampleRate != null && message.hasOwnProperty("sampleRate"))
+            writer.uint32(/* id 1, wireType 1 =*/9).double(message.sampleRate);
         if (message.name != null && message.hasOwnProperty("name"))
             writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
-        if (message.measurement != null && message.hasOwnProperty("measurement"))
-            writer.uint32(/* id 3, wireType 1 =*/25).double(message.measurement);
+        if (message.measurement != null && message.measurement.length) {
+            writer.uint32(/* id 3, wireType 2 =*/26).fork();
+            for (var i = 0; i < message.measurement.length; ++i)
+                writer.double(message.measurement[i]);
+            writer.ldelim();
+        }
         return writer;
     };
 
@@ -1558,13 +1563,20 @@ $root.Measurement = (function() {
             var tag = reader.uint32();
             switch (tag >>> 3) {
             case 1:
-                message.sourceTime = reader.double();
+                message.sampleRate = reader.double();
                 break;
             case 2:
                 message.name = reader.string();
                 break;
             case 3:
-                message.measurement = reader.double();
+                if (!(message.measurement && message.measurement.length))
+                    message.measurement = [];
+                if ((tag & 7) === 2) {
+                    var end2 = reader.uint32() + reader.pos;
+                    while (reader.pos < end2)
+                        message.measurement.push(reader.double());
+                } else
+                    message.measurement.push(reader.double());
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -1601,15 +1613,19 @@ $root.Measurement = (function() {
     Measurement.verify = function verify(message) {
         if (typeof message !== "object" || message === null)
             return "object expected";
-        if (message.sourceTime != null && message.hasOwnProperty("sourceTime"))
-            if (typeof message.sourceTime !== "number")
-                return "sourceTime: number expected";
+        if (message.sampleRate != null && message.hasOwnProperty("sampleRate"))
+            if (typeof message.sampleRate !== "number")
+                return "sampleRate: number expected";
         if (message.name != null && message.hasOwnProperty("name"))
             if (!$util.isString(message.name))
                 return "name: string expected";
-        if (message.measurement != null && message.hasOwnProperty("measurement"))
-            if (typeof message.measurement !== "number")
-                return "measurement: number expected";
+        if (message.measurement != null && message.hasOwnProperty("measurement")) {
+            if (!Array.isArray(message.measurement))
+                return "measurement: array expected";
+            for (var i = 0; i < message.measurement.length; ++i)
+                if (typeof message.measurement[i] !== "number")
+                    return "measurement: number[] expected";
+        }
         return null;
     };
 
@@ -1625,12 +1641,17 @@ $root.Measurement = (function() {
         if (object instanceof $root.Measurement)
             return object;
         var message = new $root.Measurement();
-        if (object.sourceTime != null)
-            message.sourceTime = Number(object.sourceTime);
+        if (object.sampleRate != null)
+            message.sampleRate = Number(object.sampleRate);
         if (object.name != null)
             message.name = String(object.name);
-        if (object.measurement != null)
-            message.measurement = Number(object.measurement);
+        if (object.measurement) {
+            if (!Array.isArray(object.measurement))
+                throw TypeError(".Measurement.measurement: array expected");
+            message.measurement = [];
+            for (var i = 0; i < object.measurement.length; ++i)
+                message.measurement[i] = Number(object.measurement[i]);
+        }
         return message;
     };
 
@@ -1647,17 +1668,21 @@ $root.Measurement = (function() {
         if (!options)
             options = {};
         var object = {};
+        if (options.arrays || options.defaults)
+            object.measurement = [];
         if (options.defaults) {
-            object.sourceTime = 0;
+            object.sampleRate = 0;
             object.name = "";
-            object.measurement = 0;
         }
-        if (message.sourceTime != null && message.hasOwnProperty("sourceTime"))
-            object.sourceTime = options.json && !isFinite(message.sourceTime) ? String(message.sourceTime) : message.sourceTime;
+        if (message.sampleRate != null && message.hasOwnProperty("sampleRate"))
+            object.sampleRate = options.json && !isFinite(message.sampleRate) ? String(message.sampleRate) : message.sampleRate;
         if (message.name != null && message.hasOwnProperty("name"))
             object.name = message.name;
-        if (message.measurement != null && message.hasOwnProperty("measurement"))
-            object.measurement = options.json && !isFinite(message.measurement) ? String(message.measurement) : message.measurement;
+        if (message.measurement && message.measurement.length) {
+            object.measurement = [];
+            for (var j = 0; j < message.measurement.length; ++j)
+                object.measurement[j] = options.json && !isFinite(message.measurement[j]) ? String(message.measurement[j]) : message.measurement[j];
+        }
         return object;
     };
 
