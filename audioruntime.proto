@@ -145,7 +145,7 @@ message Measurement {
     /**
      * When in time relative to the source has this happened?
      */
-    double sourceTime = 1;
+    double sampleRate = 1;
 
     /**
      * name of the measurement
@@ -153,9 +153,9 @@ message Measurement {
     string name = 2;
 
     /**
-     * The actual measurement
+     * The actual measurements
      */
-    double measurement = 3;
+    repeated double measurement = 3;
 }
 
 /**
