@@ -2726,6 +2726,9 @@ export interface IPublicPlay {
 
     /** PublicPlay latencyMultiplier */
     latencyMultiplier?: (number|null);
+
+    /** PublicPlay paymentId */
+    paymentId?: (string|null);
 }
 
 /** Represents a PublicPlay. */
@@ -2751,6 +2754,9 @@ export class PublicPlay implements IPublicPlay {
 
     /** PublicPlay latencyMultiplier. */
     public latencyMultiplier: number;
+
+    /** PublicPlay paymentId. */
+    public paymentId: string;
 
     /**
      * Creates a new PublicPlay instance using the specified properties.
