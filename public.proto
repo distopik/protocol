@@ -24,6 +24,7 @@ message PublicPlay {
     SetSettings settings = 3;
     uint32 sampleRate = 4;
     uint32 latencyMultiplier = 5;
+    string paymentId = 6;
 }
 
 message PublicInput {
