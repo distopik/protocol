@@ -25,6 +25,7 @@ message PublicPlay {
     uint32 sampleRate = 4;
     uint32 latencyMultiplier = 5;
     string paymentId = 6;
+    string userAgent = 7;
 }
 
 message PublicInput {
