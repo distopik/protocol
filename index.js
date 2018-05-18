@@ -6356,6 +6356,7 @@ $root.PublicPlay = (function() {
      * @property {number|null} [sampleRate] PublicPlay sampleRate
      * @property {number|null} [latencyMultiplier] PublicPlay latencyMultiplier
      * @property {string|null} [paymentId] PublicPlay paymentId
+     * @property {string|null} [userAgent] PublicPlay userAgent
      */
 
     /**
@@ -6423,6 +6424,14 @@ $root.PublicPlay = (function() {
     PublicPlay.prototype.paymentId = "";
 
     /**
+     * PublicPlay userAgent.
+     * @member {string} userAgent
+     * @memberof PublicPlay
+     * @instance
+     */
+    PublicPlay.prototype.userAgent = "";
+
+    /**
      * Creates a new PublicPlay instance using the specified properties.
      * @function create
      * @memberof PublicPlay
@@ -6461,6 +6470,8 @@ $root.PublicPlay = (function() {
             writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.latencyMultiplier);
         if (message.paymentId != null && message.hasOwnProperty("paymentId"))
             writer.uint32(/* id 6, wireType 2 =*/50).string(message.paymentId);
+        if (message.userAgent != null && message.hasOwnProperty("userAgent"))
+            writer.uint32(/* id 7, wireType 2 =*/58).string(message.userAgent);
         return writer;
     };
 
@@ -6517,6 +6528,9 @@ $root.PublicPlay = (function() {
                 break;
             case 6:
                 message.paymentId = reader.string();
+                break;
+            case 7:
+                message.userAgent = reader.string();
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -6580,6 +6594,9 @@ $root.PublicPlay = (function() {
         if (message.paymentId != null && message.hasOwnProperty("paymentId"))
             if (!$util.isString(message.paymentId))
                 return "paymentId: string expected";
+        if (message.userAgent != null && message.hasOwnProperty("userAgent"))
+            if (!$util.isString(message.userAgent))
+                return "userAgent: string expected";
         return null;
     };
 
@@ -6618,6 +6635,8 @@ $root.PublicPlay = (function() {
             message.latencyMultiplier = object.latencyMultiplier >>> 0;
         if (object.paymentId != null)
             message.paymentId = String(object.paymentId);
+        if (object.userAgent != null)
+            message.userAgent = String(object.userAgent);
         return message;
     };
 
@@ -6642,6 +6661,7 @@ $root.PublicPlay = (function() {
             object.sampleRate = 0;
             object.latencyMultiplier = 0;
             object.paymentId = "";
+            object.userAgent = "";
         }
         var keys2;
         if (message.inputs && (keys2 = Object.keys(message.inputs)).length) {
@@ -6659,6 +6679,8 @@ $root.PublicPlay = (function() {
             object.latencyMultiplier = message.latencyMultiplier;
         if (message.paymentId != null && message.hasOwnProperty("paymentId"))
             object.paymentId = message.paymentId;
+        if (message.userAgent != null && message.hasOwnProperty("userAgent"))
+            object.userAgent = message.userAgent;
         return object;
     };
 

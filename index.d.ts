@@ -2729,6 +2729,9 @@ export interface IPublicPlay {
 
     /** PublicPlay paymentId */
     paymentId?: (string|null);
+
+    /** PublicPlay userAgent */
+    userAgent?: (string|null);
 }
 
 /** Represents a PublicPlay. */
@@ -2757,6 +2760,9 @@ export class PublicPlay implements IPublicPlay {
 
     /** PublicPlay paymentId. */
     public paymentId: string;
+
+    /** PublicPlay userAgent. */
+    public userAgent: string;
 
     /**
      * Creates a new PublicPlay instance using the specified properties.
