@@ -1872,6 +1872,13 @@ export class PlaySetupProgress implements IPlaySetupProgress {
     public toJSON(): { [k: string]: any };
 }
 
+/** sent when the transport changed * */
+export enum TransportChanged {
+    READY = 0,
+    PLAYING = 1,
+    SEEKING = 2
+}
+
 /** Properties of an Event. */
 export interface IEvent {
 
@@ -1892,6 +1899,9 @@ export interface IEvent {
 
     /** Event seek */
     seek?: (ISeek|null);
+
+    /** Event transport */
+    transport?: (TransportChanged|null);
 }
 
 /** Represents an Event. */
@@ -1921,8 +1931,11 @@ export class Event implements IEvent {
     /** Event seek. */
     public seek?: (ISeek|null);
 
+    /** Event transport. */
+    public transport: TransportChanged;
+
     /** Event message. */
-    public message?: ("ready"|"audioReady"|"terminated"|"errorOrWarning"|"progress"|"seek");
+    public message?: ("ready"|"audioReady"|"terminated"|"errorOrWarning"|"progress"|"seek"|"transport");
 
     /**
      * Creates a new Event instance using the specified properties.

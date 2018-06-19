@@ -4359,6 +4359,22 @@ $root.PlaySetupProgress = (function() {
     return PlaySetupProgress;
 })();
 
+/**
+ * sent when the transport changed *
+ * @exports TransportChanged
+ * @enum {string}
+ * @property {number} READY=0 READY value
+ * @property {number} PLAYING=1 PLAYING value
+ * @property {number} SEEKING=2 SEEKING value
+ */
+$root.TransportChanged = (function() {
+    var valuesById = {}, values = Object.create(valuesById);
+    values[valuesById[0] = "READY"] = 0;
+    values[valuesById[1] = "PLAYING"] = 1;
+    values[valuesById[2] = "SEEKING"] = 2;
+    return values;
+})();
+
 $root.Event = (function() {
 
     /**
@@ -4371,6 +4387,7 @@ $root.Event = (function() {
      * @property {IErrorOrWarning|null} [errorOrWarning] Event errorOrWarning
      * @property {IPlaySetupProgress|null} [progress] Event progress
      * @property {ISeek|null} [seek] Event seek
+     * @property {TransportChanged|null} [transport] Event transport
      */
 
     /**
@@ -4436,17 +4453,25 @@ $root.Event = (function() {
      */
     Event.prototype.seek = null;
 
+    /**
+     * Event transport.
+     * @member {TransportChanged} transport
+     * @memberof Event
+     * @instance
+     */
+    Event.prototype.transport = 0;
+
     // OneOf field names bound to virtual getters and setters
     var $oneOfFields;
 
     /**
      * Event message.
-     * @member {"ready"|"audioReady"|"terminated"|"errorOrWarning"|"progress"|"seek"|undefined} message
+     * @member {"ready"|"audioReady"|"terminated"|"errorOrWarning"|"progress"|"seek"|"transport"|undefined} message
      * @memberof Event
      * @instance
      */
     Object.defineProperty(Event.prototype, "message", {
-        get: $util.oneOfGetter($oneOfFields = ["ready", "audioReady", "terminated", "errorOrWarning", "progress", "seek"]),
+        get: $util.oneOfGetter($oneOfFields = ["ready", "audioReady", "terminated", "errorOrWarning", "progress", "seek", "transport"]),
         set: $util.oneOfSetter($oneOfFields)
     });
 
@@ -4486,6 +4511,8 @@ $root.Event = (function() {
             $root.PlaySetupProgress.encode(message.progress, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
         if (message.seek != null && message.hasOwnProperty("seek"))
             $root.Seek.encode(message.seek, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+        if (message.transport != null && message.hasOwnProperty("transport"))
+            writer.uint32(/* id 7, wireType 0 =*/56).int32(message.transport);
         return writer;
     };
 
@@ -4537,6 +4564,9 @@ $root.Event = (function() {
                 break;
             case 6:
                 message.seek = $root.Seek.decode(reader, reader.uint32());
+                break;
+            case 7:
+                message.transport = reader.int32();
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -4632,6 +4662,19 @@ $root.Event = (function() {
                     return "seek." + error;
             }
         }
+        if (message.transport != null && message.hasOwnProperty("transport")) {
+            if (properties.message === 1)
+                return "message: multiple values";
+            properties.message = 1;
+            switch (message.transport) {
+            default:
+                return "transport: enum value expected";
+            case 0:
+            case 1:
+            case 2:
+                break;
+            }
+        }
         return null;
     };
 
@@ -4676,6 +4719,20 @@ $root.Event = (function() {
             if (typeof object.seek !== "object")
                 throw TypeError(".Event.seek: object expected");
             message.seek = $root.Seek.fromObject(object.seek);
+        }
+        switch (object.transport) {
+        case "READY":
+        case 0:
+            message.transport = 0;
+            break;
+        case "PLAYING":
+        case 1:
+            message.transport = 1;
+            break;
+        case "SEEKING":
+        case 2:
+            message.transport = 2;
+            break;
         }
         return message;
     };
@@ -4722,6 +4779,11 @@ $root.Event = (function() {
             object.seek = $root.Seek.toObject(message.seek, options);
             if (options.oneofs)
                 object.message = "seek";
+        }
+        if (message.transport != null && message.hasOwnProperty("transport")) {
+            object.transport = options.enums === String ? $root.TransportChanged[message.transport] : message.transport;
+            if (options.oneofs)
+                object.message = "transport";
         }
         return object;
     };

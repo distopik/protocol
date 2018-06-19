@@ -264,6 +264,13 @@ message PlaySetupProgress {
     string info = 1;
 }
 
+/** sent when the transport changed **/
+enum TransportChanged {
+    READY = 0;
+    PLAYING = 1;
+    SEEKING = 2;
+}
+
 message Event {
     oneof message {
         Ready ready = 1;
@@ -272,6 +279,7 @@ message Event {
         ErrorOrWarning errorOrWarning = 4;
         PlaySetupProgress progress = 5;
         Seek seek = 6;
+        TransportChanged transport = 7;
     }
 }
 
