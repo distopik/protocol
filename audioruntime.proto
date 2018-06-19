@@ -249,6 +249,10 @@ message Play {
 
 message Stop {}
 
+message Seek {
+    double position = 1;
+}
+
 message ErrorOrWarning {
     oneof message {
         string warning = 1;
@@ -267,6 +271,7 @@ message Event {
         Terminated terminated = 3;
         ErrorOrWarning errorOrWarning = 4;
         PlaySetupProgress progress = 5;
+        Seek seek = 6;
     }
 }
 
@@ -277,6 +282,7 @@ message Request {
         Terminate terminate = 3;
         SetSettings setSettings = 4;
         Stop stop = 5;
+        Seek seek = 6;
     }
 }
 

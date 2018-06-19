@@ -3752,6 +3752,193 @@ $root.Stop = (function() {
     return Stop;
 })();
 
+$root.Seek = (function() {
+
+    /**
+     * Properties of a Seek.
+     * @exports ISeek
+     * @interface ISeek
+     * @property {number|null} [position] Seek position
+     */
+
+    /**
+     * Constructs a new Seek.
+     * @exports Seek
+     * @classdesc Represents a Seek.
+     * @implements ISeek
+     * @constructor
+     * @param {ISeek=} [properties] Properties to set
+     */
+    function Seek(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * Seek position.
+     * @member {number} position
+     * @memberof Seek
+     * @instance
+     */
+    Seek.prototype.position = 0;
+
+    /**
+     * Creates a new Seek instance using the specified properties.
+     * @function create
+     * @memberof Seek
+     * @static
+     * @param {ISeek=} [properties] Properties to set
+     * @returns {Seek} Seek instance
+     */
+    Seek.create = function create(properties) {
+        return new Seek(properties);
+    };
+
+    /**
+     * Encodes the specified Seek message. Does not implicitly {@link Seek.verify|verify} messages.
+     * @function encode
+     * @memberof Seek
+     * @static
+     * @param {ISeek} message Seek message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    Seek.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.position != null && message.hasOwnProperty("position"))
+            writer.uint32(/* id 1, wireType 1 =*/9).double(message.position);
+        return writer;
+    };
+
+    /**
+     * Encodes the specified Seek message, length delimited. Does not implicitly {@link Seek.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof Seek
+     * @static
+     * @param {ISeek} message Seek message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    Seek.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes a Seek message from the specified reader or buffer.
+     * @function decode
+     * @memberof Seek
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {Seek} Seek
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    Seek.decode = function decode(reader, length) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Seek();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            switch (tag >>> 3) {
+            case 1:
+                message.position = reader.double();
+                break;
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes a Seek message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof Seek
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {Seek} Seek
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    Seek.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a Seek message.
+     * @function verify
+     * @memberof Seek
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    Seek.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (message.position != null && message.hasOwnProperty("position"))
+            if (typeof message.position !== "number")
+                return "position: number expected";
+        return null;
+    };
+
+    /**
+     * Creates a Seek message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof Seek
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {Seek} Seek
+     */
+    Seek.fromObject = function fromObject(object) {
+        if (object instanceof $root.Seek)
+            return object;
+        var message = new $root.Seek();
+        if (object.position != null)
+            message.position = Number(object.position);
+        return message;
+    };
+
+    /**
+     * Creates a plain object from a Seek message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof Seek
+     * @static
+     * @param {Seek} message Seek
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    Seek.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.defaults)
+            object.position = 0;
+        if (message.position != null && message.hasOwnProperty("position"))
+            object.position = options.json && !isFinite(message.position) ? String(message.position) : message.position;
+        return object;
+    };
+
+    /**
+     * Converts this Seek to JSON.
+     * @function toJSON
+     * @memberof Seek
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    Seek.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    return Seek;
+})();
+
 $root.ErrorOrWarning = (function() {
 
     /**
@@ -4183,6 +4370,7 @@ $root.Event = (function() {
      * @property {ITerminated|null} [terminated] Event terminated
      * @property {IErrorOrWarning|null} [errorOrWarning] Event errorOrWarning
      * @property {IPlaySetupProgress|null} [progress] Event progress
+     * @property {ISeek|null} [seek] Event seek
      */
 
     /**
@@ -4240,17 +4428,25 @@ $root.Event = (function() {
      */
     Event.prototype.progress = null;
 
+    /**
+     * Event seek.
+     * @member {ISeek|null|undefined} seek
+     * @memberof Event
+     * @instance
+     */
+    Event.prototype.seek = null;
+
     // OneOf field names bound to virtual getters and setters
     var $oneOfFields;
 
     /**
      * Event message.
-     * @member {"ready"|"audioReady"|"terminated"|"errorOrWarning"|"progress"|undefined} message
+     * @member {"ready"|"audioReady"|"terminated"|"errorOrWarning"|"progress"|"seek"|undefined} message
      * @memberof Event
      * @instance
      */
     Object.defineProperty(Event.prototype, "message", {
-        get: $util.oneOfGetter($oneOfFields = ["ready", "audioReady", "terminated", "errorOrWarning", "progress"]),
+        get: $util.oneOfGetter($oneOfFields = ["ready", "audioReady", "terminated", "errorOrWarning", "progress", "seek"]),
         set: $util.oneOfSetter($oneOfFields)
     });
 
@@ -4288,6 +4484,8 @@ $root.Event = (function() {
             $root.ErrorOrWarning.encode(message.errorOrWarning, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
         if (message.progress != null && message.hasOwnProperty("progress"))
             $root.PlaySetupProgress.encode(message.progress, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+        if (message.seek != null && message.hasOwnProperty("seek"))
+            $root.Seek.encode(message.seek, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
         return writer;
     };
 
@@ -4336,6 +4534,9 @@ $root.Event = (function() {
                 break;
             case 5:
                 message.progress = $root.PlaySetupProgress.decode(reader, reader.uint32());
+                break;
+            case 6:
+                message.seek = $root.Seek.decode(reader, reader.uint32());
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -4421,6 +4622,16 @@ $root.Event = (function() {
                     return "progress." + error;
             }
         }
+        if (message.seek != null && message.hasOwnProperty("seek")) {
+            if (properties.message === 1)
+                return "message: multiple values";
+            properties.message = 1;
+            {
+                var error = $root.Seek.verify(message.seek);
+                if (error)
+                    return "seek." + error;
+            }
+        }
         return null;
     };
 
@@ -4460,6 +4671,11 @@ $root.Event = (function() {
             if (typeof object.progress !== "object")
                 throw TypeError(".Event.progress: object expected");
             message.progress = $root.PlaySetupProgress.fromObject(object.progress);
+        }
+        if (object.seek != null) {
+            if (typeof object.seek !== "object")
+                throw TypeError(".Event.seek: object expected");
+            message.seek = $root.Seek.fromObject(object.seek);
         }
         return message;
     };
@@ -4502,6 +4718,11 @@ $root.Event = (function() {
             if (options.oneofs)
                 object.message = "progress";
         }
+        if (message.seek != null && message.hasOwnProperty("seek")) {
+            object.seek = $root.Seek.toObject(message.seek, options);
+            if (options.oneofs)
+                object.message = "seek";
+        }
         return object;
     };
 
@@ -4530,6 +4751,7 @@ $root.Request = (function() {
      * @property {ITerminate|null} [terminate] Request terminate
      * @property {ISetSettings|null} [setSettings] Request setSettings
      * @property {IStop|null} [stop] Request stop
+     * @property {ISeek|null} [seek] Request seek
      */
 
     /**
@@ -4587,17 +4809,25 @@ $root.Request = (function() {
      */
     Request.prototype.stop = null;
 
+    /**
+     * Request seek.
+     * @member {ISeek|null|undefined} seek
+     * @memberof Request
+     * @instance
+     */
+    Request.prototype.seek = null;
+
     // OneOf field names bound to virtual getters and setters
     var $oneOfFields;
 
     /**
      * Request command.
-     * @member {"play"|"terminate"|"setSettings"|"stop"|undefined} command
+     * @member {"play"|"terminate"|"setSettings"|"stop"|"seek"|undefined} command
      * @memberof Request
      * @instance
      */
     Object.defineProperty(Request.prototype, "command", {
-        get: $util.oneOfGetter($oneOfFields = ["play", "terminate", "setSettings", "stop"]),
+        get: $util.oneOfGetter($oneOfFields = ["play", "terminate", "setSettings", "stop", "seek"]),
         set: $util.oneOfSetter($oneOfFields)
     });
 
@@ -4635,6 +4865,8 @@ $root.Request = (function() {
             $root.SetSettings.encode(message.setSettings, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
         if (message.stop != null && message.hasOwnProperty("stop"))
             $root.Stop.encode(message.stop, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+        if (message.seek != null && message.hasOwnProperty("seek"))
+            $root.Seek.encode(message.seek, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
         return writer;
     };
 
@@ -4683,6 +4915,9 @@ $root.Request = (function() {
                 break;
             case 5:
                 message.stop = $root.Stop.decode(reader, reader.uint32());
+                break;
+            case 6:
+                message.seek = $root.Seek.decode(reader, reader.uint32());
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -4761,6 +4996,16 @@ $root.Request = (function() {
                     return "stop." + error;
             }
         }
+        if (message.seek != null && message.hasOwnProperty("seek")) {
+            if (properties.command === 1)
+                return "command: multiple values";
+            properties.command = 1;
+            {
+                var error = $root.Seek.verify(message.seek);
+                if (error)
+                    return "seek." + error;
+            }
+        }
         return null;
     };
 
@@ -4797,6 +5042,11 @@ $root.Request = (function() {
             if (typeof object.stop !== "object")
                 throw TypeError(".Request.stop: object expected");
             message.stop = $root.Stop.fromObject(object.stop);
+        }
+        if (object.seek != null) {
+            if (typeof object.seek !== "object")
+                throw TypeError(".Request.seek: object expected");
+            message.seek = $root.Seek.fromObject(object.seek);
         }
         return message;
     };
@@ -4837,6 +5087,11 @@ $root.Request = (function() {
             object.stop = $root.Stop.toObject(message.stop, options);
             if (options.oneofs)
                 object.command = "stop";
+        }
+        if (message.seek != null && message.hasOwnProperty("seek")) {
+            object.seek = $root.Seek.toObject(message.seek, options);
+            if (options.oneofs)
+                object.command = "seek";
         }
         return object;
     };
