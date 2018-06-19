@@ -247,11 +247,17 @@ message Play {
     SetSettings settings = 5;
 }
 
+message Stop {}
+
 message ErrorOrWarning {
     oneof message {
         string warning = 1;
         string error = 2;
     }
+}
+
+message PlaySetupProgress {
+    string info = 1;
 }
 
 message Event {
@@ -260,6 +266,7 @@ message Event {
         AudioReady audioReady = 2;
         Terminated terminated = 3;
         ErrorOrWarning errorOrWarning = 4;
+        PlaySetupProgress progress = 5;
     }
 }
 
@@ -269,6 +276,7 @@ message Request {
         Play play = 2;
         Terminate terminate = 3;
         SetSettings setSettings = 4;
+        Stop stop = 5;
     }
 }
 

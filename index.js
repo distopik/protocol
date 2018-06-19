@@ -3592,6 +3592,166 @@ $root.Play = (function() {
     return Play;
 })();
 
+$root.Stop = (function() {
+
+    /**
+     * Properties of a Stop.
+     * @exports IStop
+     * @interface IStop
+     */
+
+    /**
+     * Constructs a new Stop.
+     * @exports Stop
+     * @classdesc Represents a Stop.
+     * @implements IStop
+     * @constructor
+     * @param {IStop=} [properties] Properties to set
+     */
+    function Stop(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * Creates a new Stop instance using the specified properties.
+     * @function create
+     * @memberof Stop
+     * @static
+     * @param {IStop=} [properties] Properties to set
+     * @returns {Stop} Stop instance
+     */
+    Stop.create = function create(properties) {
+        return new Stop(properties);
+    };
+
+    /**
+     * Encodes the specified Stop message. Does not implicitly {@link Stop.verify|verify} messages.
+     * @function encode
+     * @memberof Stop
+     * @static
+     * @param {IStop} message Stop message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    Stop.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        return writer;
+    };
+
+    /**
+     * Encodes the specified Stop message, length delimited. Does not implicitly {@link Stop.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof Stop
+     * @static
+     * @param {IStop} message Stop message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    Stop.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes a Stop message from the specified reader or buffer.
+     * @function decode
+     * @memberof Stop
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {Stop} Stop
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    Stop.decode = function decode(reader, length) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.Stop();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            switch (tag >>> 3) {
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes a Stop message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof Stop
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {Stop} Stop
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    Stop.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a Stop message.
+     * @function verify
+     * @memberof Stop
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    Stop.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        return null;
+    };
+
+    /**
+     * Creates a Stop message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof Stop
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {Stop} Stop
+     */
+    Stop.fromObject = function fromObject(object) {
+        if (object instanceof $root.Stop)
+            return object;
+        return new $root.Stop();
+    };
+
+    /**
+     * Creates a plain object from a Stop message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof Stop
+     * @static
+     * @param {Stop} message Stop
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    Stop.toObject = function toObject() {
+        return {};
+    };
+
+    /**
+     * Converts this Stop to JSON.
+     * @function toJSON
+     * @memberof Stop
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    Stop.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    return Stop;
+})();
+
 $root.ErrorOrWarning = (function() {
 
     /**
@@ -3825,6 +3985,193 @@ $root.ErrorOrWarning = (function() {
     return ErrorOrWarning;
 })();
 
+$root.PlaySetupProgress = (function() {
+
+    /**
+     * Properties of a PlaySetupProgress.
+     * @exports IPlaySetupProgress
+     * @interface IPlaySetupProgress
+     * @property {string|null} [info] PlaySetupProgress info
+     */
+
+    /**
+     * Constructs a new PlaySetupProgress.
+     * @exports PlaySetupProgress
+     * @classdesc Represents a PlaySetupProgress.
+     * @implements IPlaySetupProgress
+     * @constructor
+     * @param {IPlaySetupProgress=} [properties] Properties to set
+     */
+    function PlaySetupProgress(properties) {
+        if (properties)
+            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                if (properties[keys[i]] != null)
+                    this[keys[i]] = properties[keys[i]];
+    }
+
+    /**
+     * PlaySetupProgress info.
+     * @member {string} info
+     * @memberof PlaySetupProgress
+     * @instance
+     */
+    PlaySetupProgress.prototype.info = "";
+
+    /**
+     * Creates a new PlaySetupProgress instance using the specified properties.
+     * @function create
+     * @memberof PlaySetupProgress
+     * @static
+     * @param {IPlaySetupProgress=} [properties] Properties to set
+     * @returns {PlaySetupProgress} PlaySetupProgress instance
+     */
+    PlaySetupProgress.create = function create(properties) {
+        return new PlaySetupProgress(properties);
+    };
+
+    /**
+     * Encodes the specified PlaySetupProgress message. Does not implicitly {@link PlaySetupProgress.verify|verify} messages.
+     * @function encode
+     * @memberof PlaySetupProgress
+     * @static
+     * @param {IPlaySetupProgress} message PlaySetupProgress message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    PlaySetupProgress.encode = function encode(message, writer) {
+        if (!writer)
+            writer = $Writer.create();
+        if (message.info != null && message.hasOwnProperty("info"))
+            writer.uint32(/* id 1, wireType 2 =*/10).string(message.info);
+        return writer;
+    };
+
+    /**
+     * Encodes the specified PlaySetupProgress message, length delimited. Does not implicitly {@link PlaySetupProgress.verify|verify} messages.
+     * @function encodeDelimited
+     * @memberof PlaySetupProgress
+     * @static
+     * @param {IPlaySetupProgress} message PlaySetupProgress message or plain object to encode
+     * @param {$protobuf.Writer} [writer] Writer to encode to
+     * @returns {$protobuf.Writer} Writer
+     */
+    PlaySetupProgress.encodeDelimited = function encodeDelimited(message, writer) {
+        return this.encode(message, writer).ldelim();
+    };
+
+    /**
+     * Decodes a PlaySetupProgress message from the specified reader or buffer.
+     * @function decode
+     * @memberof PlaySetupProgress
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @param {number} [length] Message length if known beforehand
+     * @returns {PlaySetupProgress} PlaySetupProgress
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    PlaySetupProgress.decode = function decode(reader, length) {
+        if (!(reader instanceof $Reader))
+            reader = $Reader.create(reader);
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.PlaySetupProgress();
+        while (reader.pos < end) {
+            var tag = reader.uint32();
+            switch (tag >>> 3) {
+            case 1:
+                message.info = reader.string();
+                break;
+            default:
+                reader.skipType(tag & 7);
+                break;
+            }
+        }
+        return message;
+    };
+
+    /**
+     * Decodes a PlaySetupProgress message from the specified reader or buffer, length delimited.
+     * @function decodeDelimited
+     * @memberof PlaySetupProgress
+     * @static
+     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+     * @returns {PlaySetupProgress} PlaySetupProgress
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    PlaySetupProgress.decodeDelimited = function decodeDelimited(reader) {
+        if (!(reader instanceof $Reader))
+            reader = new $Reader(reader);
+        return this.decode(reader, reader.uint32());
+    };
+
+    /**
+     * Verifies a PlaySetupProgress message.
+     * @function verify
+     * @memberof PlaySetupProgress
+     * @static
+     * @param {Object.<string,*>} message Plain object to verify
+     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+     */
+    PlaySetupProgress.verify = function verify(message) {
+        if (typeof message !== "object" || message === null)
+            return "object expected";
+        if (message.info != null && message.hasOwnProperty("info"))
+            if (!$util.isString(message.info))
+                return "info: string expected";
+        return null;
+    };
+
+    /**
+     * Creates a PlaySetupProgress message from a plain object. Also converts values to their respective internal types.
+     * @function fromObject
+     * @memberof PlaySetupProgress
+     * @static
+     * @param {Object.<string,*>} object Plain object
+     * @returns {PlaySetupProgress} PlaySetupProgress
+     */
+    PlaySetupProgress.fromObject = function fromObject(object) {
+        if (object instanceof $root.PlaySetupProgress)
+            return object;
+        var message = new $root.PlaySetupProgress();
+        if (object.info != null)
+            message.info = String(object.info);
+        return message;
+    };
+
+    /**
+     * Creates a plain object from a PlaySetupProgress message. Also converts values to other types if specified.
+     * @function toObject
+     * @memberof PlaySetupProgress
+     * @static
+     * @param {PlaySetupProgress} message PlaySetupProgress
+     * @param {$protobuf.IConversionOptions} [options] Conversion options
+     * @returns {Object.<string,*>} Plain object
+     */
+    PlaySetupProgress.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.defaults)
+            object.info = "";
+        if (message.info != null && message.hasOwnProperty("info"))
+            object.info = message.info;
+        return object;
+    };
+
+    /**
+     * Converts this PlaySetupProgress to JSON.
+     * @function toJSON
+     * @memberof PlaySetupProgress
+     * @instance
+     * @returns {Object.<string,*>} JSON object
+     */
+    PlaySetupProgress.prototype.toJSON = function toJSON() {
+        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+    };
+
+    return PlaySetupProgress;
+})();
+
 $root.Event = (function() {
 
     /**
@@ -3835,6 +4182,7 @@ $root.Event = (function() {
      * @property {IAudioReady|null} [audioReady] Event audioReady
      * @property {ITerminated|null} [terminated] Event terminated
      * @property {IErrorOrWarning|null} [errorOrWarning] Event errorOrWarning
+     * @property {IPlaySetupProgress|null} [progress] Event progress
      */
 
     /**
@@ -3884,17 +4232,25 @@ $root.Event = (function() {
      */
     Event.prototype.errorOrWarning = null;
 
+    /**
+     * Event progress.
+     * @member {IPlaySetupProgress|null|undefined} progress
+     * @memberof Event
+     * @instance
+     */
+    Event.prototype.progress = null;
+
     // OneOf field names bound to virtual getters and setters
     var $oneOfFields;
 
     /**
      * Event message.
-     * @member {"ready"|"audioReady"|"terminated"|"errorOrWarning"|undefined} message
+     * @member {"ready"|"audioReady"|"terminated"|"errorOrWarning"|"progress"|undefined} message
      * @memberof Event
      * @instance
      */
     Object.defineProperty(Event.prototype, "message", {
-        get: $util.oneOfGetter($oneOfFields = ["ready", "audioReady", "terminated", "errorOrWarning"]),
+        get: $util.oneOfGetter($oneOfFields = ["ready", "audioReady", "terminated", "errorOrWarning", "progress"]),
         set: $util.oneOfSetter($oneOfFields)
     });
 
@@ -3930,6 +4286,8 @@ $root.Event = (function() {
             $root.Terminated.encode(message.terminated, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
         if (message.errorOrWarning != null && message.hasOwnProperty("errorOrWarning"))
             $root.ErrorOrWarning.encode(message.errorOrWarning, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+        if (message.progress != null && message.hasOwnProperty("progress"))
+            $root.PlaySetupProgress.encode(message.progress, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
         return writer;
     };
 
@@ -3975,6 +4333,9 @@ $root.Event = (function() {
                 break;
             case 4:
                 message.errorOrWarning = $root.ErrorOrWarning.decode(reader, reader.uint32());
+                break;
+            case 5:
+                message.progress = $root.PlaySetupProgress.decode(reader, reader.uint32());
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -4050,6 +4411,16 @@ $root.Event = (function() {
                     return "errorOrWarning." + error;
             }
         }
+        if (message.progress != null && message.hasOwnProperty("progress")) {
+            if (properties.message === 1)
+                return "message: multiple values";
+            properties.message = 1;
+            {
+                var error = $root.PlaySetupProgress.verify(message.progress);
+                if (error)
+                    return "progress." + error;
+            }
+        }
         return null;
     };
 
@@ -4084,6 +4455,11 @@ $root.Event = (function() {
             if (typeof object.errorOrWarning !== "object")
                 throw TypeError(".Event.errorOrWarning: object expected");
             message.errorOrWarning = $root.ErrorOrWarning.fromObject(object.errorOrWarning);
+        }
+        if (object.progress != null) {
+            if (typeof object.progress !== "object")
+                throw TypeError(".Event.progress: object expected");
+            message.progress = $root.PlaySetupProgress.fromObject(object.progress);
         }
         return message;
     };
@@ -4121,6 +4497,11 @@ $root.Event = (function() {
             if (options.oneofs)
                 object.message = "errorOrWarning";
         }
+        if (message.progress != null && message.hasOwnProperty("progress")) {
+            object.progress = $root.PlaySetupProgress.toObject(message.progress, options);
+            if (options.oneofs)
+                object.message = "progress";
+        }
         return object;
     };
 
@@ -4148,6 +4529,7 @@ $root.Request = (function() {
      * @property {IPlay|null} [play] Request play
      * @property {ITerminate|null} [terminate] Request terminate
      * @property {ISetSettings|null} [setSettings] Request setSettings
+     * @property {IStop|null} [stop] Request stop
      */
 
     /**
@@ -4197,17 +4579,25 @@ $root.Request = (function() {
      */
     Request.prototype.setSettings = null;
 
+    /**
+     * Request stop.
+     * @member {IStop|null|undefined} stop
+     * @memberof Request
+     * @instance
+     */
+    Request.prototype.stop = null;
+
     // OneOf field names bound to virtual getters and setters
     var $oneOfFields;
 
     /**
      * Request command.
-     * @member {"play"|"terminate"|"setSettings"|undefined} command
+     * @member {"play"|"terminate"|"setSettings"|"stop"|undefined} command
      * @memberof Request
      * @instance
      */
     Object.defineProperty(Request.prototype, "command", {
-        get: $util.oneOfGetter($oneOfFields = ["play", "terminate", "setSettings"]),
+        get: $util.oneOfGetter($oneOfFields = ["play", "terminate", "setSettings", "stop"]),
         set: $util.oneOfSetter($oneOfFields)
     });
 
@@ -4243,6 +4633,8 @@ $root.Request = (function() {
             $root.Terminate.encode(message.terminate, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
         if (message.setSettings != null && message.hasOwnProperty("setSettings"))
             $root.SetSettings.encode(message.setSettings, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+        if (message.stop != null && message.hasOwnProperty("stop"))
+            $root.Stop.encode(message.stop, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
         return writer;
     };
 
@@ -4288,6 +4680,9 @@ $root.Request = (function() {
                 break;
             case 4:
                 message.setSettings = $root.SetSettings.decode(reader, reader.uint32());
+                break;
+            case 5:
+                message.stop = $root.Stop.decode(reader, reader.uint32());
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -4356,6 +4751,16 @@ $root.Request = (function() {
                     return "setSettings." + error;
             }
         }
+        if (message.stop != null && message.hasOwnProperty("stop")) {
+            if (properties.command === 1)
+                return "command: multiple values";
+            properties.command = 1;
+            {
+                var error = $root.Stop.verify(message.stop);
+                if (error)
+                    return "stop." + error;
+            }
+        }
         return null;
     };
 
@@ -4387,6 +4792,11 @@ $root.Request = (function() {
             if (typeof object.setSettings !== "object")
                 throw TypeError(".Request.setSettings: object expected");
             message.setSettings = $root.SetSettings.fromObject(object.setSettings);
+        }
+        if (object.stop != null) {
+            if (typeof object.stop !== "object")
+                throw TypeError(".Request.stop: object expected");
+            message.stop = $root.Stop.fromObject(object.stop);
         }
         return message;
     };
@@ -4422,6 +4832,11 @@ $root.Request = (function() {
             object.setSettings = $root.SetSettings.toObject(message.setSettings, options);
             if (options.oneofs)
                 object.command = "setSettings";
+        }
+        if (message.stop != null && message.hasOwnProperty("stop")) {
+            object.stop = $root.Stop.toObject(message.stop, options);
+            if (options.oneofs)
+                object.command = "stop";
         }
         return object;
     };

@@ -1509,6 +1509,90 @@ export class Play implements IPlay {
     public toJSON(): { [k: string]: any };
 }
 
+/** Properties of a Stop. */
+export interface IStop {
+}
+
+/** Represents a Stop. */
+export class Stop implements IStop {
+
+    /**
+     * Constructs a new Stop.
+     * @param [properties] Properties to set
+     */
+    constructor(properties?: IStop);
+
+    /**
+     * Creates a new Stop instance using the specified properties.
+     * @param [properties] Properties to set
+     * @returns Stop instance
+     */
+    public static create(properties?: IStop): Stop;
+
+    /**
+     * Encodes the specified Stop message. Does not implicitly {@link Stop.verify|verify} messages.
+     * @param message Stop message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(message: IStop, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Encodes the specified Stop message, length delimited. Does not implicitly {@link Stop.verify|verify} messages.
+     * @param message Stop message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encodeDelimited(message: IStop, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Decodes a Stop message from the specified reader or buffer.
+     * @param reader Reader or buffer to decode from
+     * @param [length] Message length if known beforehand
+     * @returns Stop
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): Stop;
+
+    /**
+     * Decodes a Stop message from the specified reader or buffer, length delimited.
+     * @param reader Reader or buffer to decode from
+     * @returns Stop
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): Stop;
+
+    /**
+     * Verifies a Stop message.
+     * @param message Plain object to verify
+     * @returns `null` if valid, otherwise the reason why it is not
+     */
+    public static verify(message: { [k: string]: any }): (string|null);
+
+    /**
+     * Creates a Stop message from a plain object. Also converts values to their respective internal types.
+     * @param object Plain object
+     * @returns Stop
+     */
+    public static fromObject(object: { [k: string]: any }): Stop;
+
+    /**
+     * Creates a plain object from a Stop message. Also converts values to other types if specified.
+     * @param message Stop
+     * @param [options] Conversion options
+     * @returns Plain object
+     */
+    public static toObject(message: Stop, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+    /**
+     * Converts this Stop to JSON.
+     * @returns JSON object
+     */
+    public toJSON(): { [k: string]: any };
+}
+
 /** Properties of an ErrorOrWarning. */
 export interface IErrorOrWarning {
 
@@ -1608,6 +1692,96 @@ export class ErrorOrWarning implements IErrorOrWarning {
     public toJSON(): { [k: string]: any };
 }
 
+/** Properties of a PlaySetupProgress. */
+export interface IPlaySetupProgress {
+
+    /** PlaySetupProgress info */
+    info?: (string|null);
+}
+
+/** Represents a PlaySetupProgress. */
+export class PlaySetupProgress implements IPlaySetupProgress {
+
+    /**
+     * Constructs a new PlaySetupProgress.
+     * @param [properties] Properties to set
+     */
+    constructor(properties?: IPlaySetupProgress);
+
+    /** PlaySetupProgress info. */
+    public info: string;
+
+    /**
+     * Creates a new PlaySetupProgress instance using the specified properties.
+     * @param [properties] Properties to set
+     * @returns PlaySetupProgress instance
+     */
+    public static create(properties?: IPlaySetupProgress): PlaySetupProgress;
+
+    /**
+     * Encodes the specified PlaySetupProgress message. Does not implicitly {@link PlaySetupProgress.verify|verify} messages.
+     * @param message PlaySetupProgress message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encode(message: IPlaySetupProgress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Encodes the specified PlaySetupProgress message, length delimited. Does not implicitly {@link PlaySetupProgress.verify|verify} messages.
+     * @param message PlaySetupProgress message or plain object to encode
+     * @param [writer] Writer to encode to
+     * @returns Writer
+     */
+    public static encodeDelimited(message: IPlaySetupProgress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+    /**
+     * Decodes a PlaySetupProgress message from the specified reader or buffer.
+     * @param reader Reader or buffer to decode from
+     * @param [length] Message length if known beforehand
+     * @returns PlaySetupProgress
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): PlaySetupProgress;
+
+    /**
+     * Decodes a PlaySetupProgress message from the specified reader or buffer, length delimited.
+     * @param reader Reader or buffer to decode from
+     * @returns PlaySetupProgress
+     * @throws {Error} If the payload is not a reader or valid buffer
+     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+     */
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): PlaySetupProgress;
+
+    /**
+     * Verifies a PlaySetupProgress message.
+     * @param message Plain object to verify
+     * @returns `null` if valid, otherwise the reason why it is not
+     */
+    public static verify(message: { [k: string]: any }): (string|null);
+
+    /**
+     * Creates a PlaySetupProgress message from a plain object. Also converts values to their respective internal types.
+     * @param object Plain object
+     * @returns PlaySetupProgress
+     */
+    public static fromObject(object: { [k: string]: any }): PlaySetupProgress;
+
+    /**
+     * Creates a plain object from a PlaySetupProgress message. Also converts values to other types if specified.
+     * @param message PlaySetupProgress
+     * @param [options] Conversion options
+     * @returns Plain object
+     */
+    public static toObject(message: PlaySetupProgress, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+    /**
+     * Converts this PlaySetupProgress to JSON.
+     * @returns JSON object
+     */
+    public toJSON(): { [k: string]: any };
+}
+
 /** Properties of an Event. */
 export interface IEvent {
 
@@ -1622,6 +1796,9 @@ export interface IEvent {
 
     /** Event errorOrWarning */
     errorOrWarning?: (IErrorOrWarning|null);
+
+    /** Event progress */
+    progress?: (IPlaySetupProgress|null);
 }
 
 /** Represents an Event. */
@@ -1645,8 +1822,11 @@ export class Event implements IEvent {
     /** Event errorOrWarning. */
     public errorOrWarning?: (IErrorOrWarning|null);
 
+    /** Event progress. */
+    public progress?: (IPlaySetupProgress|null);
+
     /** Event message. */
-    public message?: ("ready"|"audioReady"|"terminated"|"errorOrWarning");
+    public message?: ("ready"|"audioReady"|"terminated"|"errorOrWarning"|"progress");
 
     /**
      * Creates a new Event instance using the specified properties.
@@ -1733,6 +1913,9 @@ export interface IRequest {
 
     /** Request setSettings */
     setSettings?: (ISetSettings|null);
+
+    /** Request stop */
+    stop?: (IStop|null);
 }
 
 /** Represents a Request. */
@@ -1756,8 +1939,11 @@ export class Request implements IRequest {
     /** Request setSettings. */
     public setSettings?: (ISetSettings|null);
 
+    /** Request stop. */
+    public stop?: (IStop|null);
+
     /** Request command. */
-    public command?: ("play"|"terminate"|"setSettings");
+    public command?: ("play"|"terminate"|"setSettings"|"stop");
 
     /**
      * Creates a new Request instance using the specified properties.
