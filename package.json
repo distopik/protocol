@@ -14,6 +14,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "protobufjs": "^6.8.5"
+    "protobufjs": ">=6.8.6"
   }
 }
