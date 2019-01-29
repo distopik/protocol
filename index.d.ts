@@ -1,5 +1,4 @@
 import * as $protobuf from "protobufjs";
-
 /** Properties of an OutputCoding. */
 export interface IOutputCoding {
 
@@ -1412,6 +1411,9 @@ export interface IPlay {
 
     /** Play settings */
     settings?: (ISetSettings|null);
+
+    /** Play opaqueId */
+    opaqueId?: (string|null);
 }
 
 /** Represents a Play. */
@@ -1437,6 +1439,9 @@ export class Play implements IPlay {
 
     /** Play settings. */
     public settings?: (ISetSettings|null);
+
+    /** Play opaqueId. */
+    public opaqueId: string;
 
     /**
      * Creates a new Play instance using the specified properties.

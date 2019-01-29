@@ -1,4 +1,4 @@
-/*eslint-disable block-scoped-var, no-redeclare, no-control-regex, no-prototype-builtins*/
+/*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
 "use strict";
 
 var $protobuf = require("protobufjs/minimal");
@@ -2139,7 +2139,13 @@ $root.AudioReady = (function() {
         if (options.arrays || options.defaults)
             object.measurements = [];
         if (options.defaults) {
-            object.buffer = options.bytes === String ? "" : [];
+            if (options.bytes === String)
+                object.buffer = "";
+            else {
+                object.buffer = [];
+                if (options.bytes !== Array)
+                    object.buffer = $util.newBuffer(object.buffer);
+            }
             object.sequence = 0;
             if ($util.Long) {
                 var long = new $util.Long(0, 0, true);
@@ -3238,6 +3244,7 @@ $root.Play = (function() {
      * @property {IOutputCoding|null} [output] Play output
      * @property {Array.<IConnection>|null} [flow] Play flow
      * @property {ISetSettings|null} [settings] Play settings
+     * @property {string|null} [opaqueId] Play opaqueId
      */
 
     /**
@@ -3299,6 +3306,14 @@ $root.Play = (function() {
     Play.prototype.settings = null;
 
     /**
+     * Play opaqueId.
+     * @member {string} opaqueId
+     * @memberof Play
+     * @instance
+     */
+    Play.prototype.opaqueId = "";
+
+    /**
      * Creates a new Play instance using the specified properties.
      * @function create
      * @memberof Play
@@ -3339,6 +3354,8 @@ $root.Play = (function() {
                 $root.Connection.encode(message.flow[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
         if (message.settings != null && message.hasOwnProperty("settings"))
             $root.SetSettings.encode(message.settings, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+        if (message.opaqueId != null && message.hasOwnProperty("opaqueId"))
+            writer.uint32(/* id 6, wireType 2 =*/50).string(message.opaqueId);
         return writer;
     };
 
@@ -3399,6 +3416,9 @@ $root.Play = (function() {
                 break;
             case 5:
                 message.settings = $root.SetSettings.decode(reader, reader.uint32());
+                break;
+            case 6:
+                message.opaqueId = reader.string();
                 break;
             default:
                 reader.skipType(tag & 7);
@@ -3474,6 +3494,9 @@ $root.Play = (function() {
             if (error)
                 return "settings." + error;
         }
+        if (message.opaqueId != null && message.hasOwnProperty("opaqueId"))
+            if (!$util.isString(message.opaqueId))
+                return "opaqueId: string expected";
         return null;
     };
 
@@ -3529,6 +3552,8 @@ $root.Play = (function() {
                 throw TypeError(".Play.settings: object expected");
             message.settings = $root.SetSettings.fromObject(object.settings);
         }
+        if (object.opaqueId != null)
+            message.opaqueId = String(object.opaqueId);
         return message;
     };
 
@@ -3554,6 +3579,7 @@ $root.Play = (function() {
         if (options.defaults) {
             object.output = null;
             object.settings = null;
+            object.opaqueId = "";
         }
         var keys2;
         if (message.inputs && (keys2 = Object.keys(message.inputs)).length) {
@@ -3575,6 +3601,8 @@ $root.Play = (function() {
         }
         if (message.settings != null && message.hasOwnProperty("settings"))
             object.settings = $root.SetSettings.toObject(message.settings, options);
+        if (message.opaqueId != null && message.hasOwnProperty("opaqueId"))
+            object.opaqueId = message.opaqueId;
         return object;
     };
 
@@ -5753,9 +5781,9 @@ $root.AudioRuntime = (function() {
      * @returns {undefined}
      * @variation 1
      */
-    AudioRuntime.prototype.updateSettings = function updateSettings(request, callback) {
+    Object.defineProperty(AudioRuntime.prototype.updateSettings = function updateSettings(request, callback) {
         return this.rpcCall(updateSettings, $root.SetSettings, $root.AudioRuntimeStatus, request, callback);
-    };
+    }, "name", { value: "UpdateSettings" });
 
     /**
      * Calls UpdateSettings.
@@ -5786,9 +5814,9 @@ $root.AudioRuntime = (function() {
      * @returns {undefined}
      * @variation 1
      */
-    AudioRuntime.prototype.play = function play(request, callback) {
+    Object.defineProperty(AudioRuntime.prototype.play = function play(request, callback) {
         return this.rpcCall(play, $root.NoParameters, $root.Event, request, callback);
-    };
+    }, "name", { value: "Play" });
 
     /**
      * Calls Play.
@@ -5819,9 +5847,9 @@ $root.AudioRuntime = (function() {
      * @returns {undefined}
      * @variation 1
      */
-    AudioRuntime.prototype.doTerminate = function doTerminate(request, callback) {
+    Object.defineProperty(AudioRuntime.prototype.doTerminate = function doTerminate(request, callback) {
         return this.rpcCall(doTerminate, $root.Terminate, $root.AudioRuntimeStatus, request, callback);
-    };
+    }, "name", { value: "DoTerminate" });
 
     /**
      * Calls DoTerminate.
@@ -6026,7 +6054,13 @@ $root.ChannelData = (function() {
         var object = {};
         if (options.defaults) {
             object.index = 0;
-            object.data = options.bytes === String ? "" : [];
+            if (options.bytes === String)
+                object.data = "";
+            else {
+                object.data = [];
+                if (options.bytes !== Array)
+                    object.data = $util.newBuffer(object.data);
+            }
         }
         if (message.index != null && message.hasOwnProperty("index"))
             object.index = message.index;
@@ -6563,9 +6597,9 @@ $root.AudioServer = (function() {
      * @returns {undefined}
      * @variation 1
      */
-    AudioServer.prototype.exchange = function exchange(request, callback) {
+    Object.defineProperty(AudioServer.prototype.exchange = function exchange(request, callback) {
         return this.rpcCall(exchange, $root.ExchangeChannels, $root.ProvideChannels, request, callback);
-    };
+    }, "name", { value: "exchange" });
 
     /**
      * Calls exchange.

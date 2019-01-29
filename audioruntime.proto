@@ -245,6 +245,7 @@ message Play {
     OutputCoding output = 2;
     repeated Connection flow = 4;
     SetSettings settings = 5;
+    string opaqueId = 6;
 }
 
 message Stop {}
