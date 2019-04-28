@@ -248,7 +248,8 @@ message Play {
     string opaqueId = 6;
 }
 
-message Stop {}
+message Stop {
+}
 
 message Seek {
     double position = 1;
@@ -301,13 +302,17 @@ message Response {
 }
 
 message AudioRuntimeStatus {
+    double position = 1;
+    bool playing = 2;
 }
 
 message NoParameters {
 }
 
 service AudioRuntime {
-    rpc UpdateSettings (SetSettings) returns (AudioRuntimeStatus);
-    rpc Play (NoParameters) returns (stream Event);
+    rpc DoSetSettings (SetSettings) returns (AudioRuntimeStatus);
+    rpc DoPlay (NoParameters) returns (stream Event);
+    rpc DoSeek (Seek) returns (AudioRuntimeStatus);
+    rpc DoStop (NoParameters) returns (AudioRuntimeStatus);
     rpc DoTerminate (Terminate) returns (AudioRuntimeStatus);
 }

@@ -2234,6 +2234,12 @@ export class Response implements IResponse {
 
 /** Properties of an AudioRuntimeStatus. */
 export interface IAudioRuntimeStatus {
+
+    /** AudioRuntimeStatus position */
+    position?: (number|null);
+
+    /** AudioRuntimeStatus playing */
+    playing?: (boolean|null);
 }
 
 /** Represents an AudioRuntimeStatus. */
@@ -2244,6 +2250,12 @@ export class AudioRuntimeStatus implements IAudioRuntimeStatus {
      * @param [properties] Properties to set
      */
     constructor(properties?: IAudioRuntimeStatus);
+
+    /** AudioRuntimeStatus position. */
+    public position: number;
+
+    /** AudioRuntimeStatus playing. */
+    public playing: boolean;
 
     /**
      * Creates a new AudioRuntimeStatus instance using the specified properties.
@@ -2421,32 +2433,60 @@ export class AudioRuntime extends $protobuf.rpc.Service {
     public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): AudioRuntime;
 
     /**
-     * Calls UpdateSettings.
+     * Calls DoSetSettings.
      * @param request SetSettings message or plain object
      * @param callback Node-style callback called with the error, if any, and AudioRuntimeStatus
      */
-    public updateSettings(request: ISetSettings, callback: AudioRuntime.UpdateSettingsCallback): void;
+    public doSetSettings(request: ISetSettings, callback: AudioRuntime.DoSetSettingsCallback): void;
 
     /**
-     * Calls UpdateSettings.
+     * Calls DoSetSettings.
      * @param request SetSettings message or plain object
      * @returns Promise
      */
-    public updateSettings(request: ISetSettings): Promise<AudioRuntimeStatus>;
+    public doSetSettings(request: ISetSettings): Promise<AudioRuntimeStatus>;
 
     /**
-     * Calls Play.
+     * Calls DoPlay.
      * @param request NoParameters message or plain object
      * @param callback Node-style callback called with the error, if any, and Event
      */
-    public play(request: INoParameters, callback: AudioRuntime.PlayCallback): void;
+    public doPlay(request: INoParameters, callback: AudioRuntime.DoPlayCallback): void;
 
     /**
-     * Calls Play.
+     * Calls DoPlay.
      * @param request NoParameters message or plain object
      * @returns Promise
      */
-    public play(request: INoParameters): Promise<Event>;
+    public doPlay(request: INoParameters): Promise<Event>;
+
+    /**
+     * Calls DoSeek.
+     * @param request Seek message or plain object
+     * @param callback Node-style callback called with the error, if any, and AudioRuntimeStatus
+     */
+    public doSeek(request: ISeek, callback: AudioRuntime.DoSeekCallback): void;
+
+    /**
+     * Calls DoSeek.
+     * @param request Seek message or plain object
+     * @returns Promise
+     */
+    public doSeek(request: ISeek): Promise<AudioRuntimeStatus>;
+
+    /**
+     * Calls DoStop.
+     * @param request NoParameters message or plain object
+     * @param callback Node-style callback called with the error, if any, and AudioRuntimeStatus
+     */
+    public doStop(request: INoParameters, callback: AudioRuntime.DoStopCallback): void;
+
+    /**
+     * Calls DoStop.
+     * @param request NoParameters message or plain object
+     * @returns Promise
+     */
+    public doStop(request: INoParameters): Promise<AudioRuntimeStatus>;
 
     /**
      * Calls DoTerminate.
@@ -2466,18 +2506,32 @@ export class AudioRuntime extends $protobuf.rpc.Service {
 export namespace AudioRuntime {
 
     /**
-     * Callback as used by {@link AudioRuntime#updateSettings}.
+     * Callback as used by {@link AudioRuntime#doSetSettings}.
      * @param error Error, if any
      * @param [response] AudioRuntimeStatus
      */
-    type UpdateSettingsCallback = (error: (Error|null), response?: AudioRuntimeStatus) => void;
+    type DoSetSettingsCallback = (error: (Error|null), response?: AudioRuntimeStatus) => void;
 
     /**
-     * Callback as used by {@link AudioRuntime#play}.
+     * Callback as used by {@link AudioRuntime#doPlay}.
      * @param error Error, if any
      * @param [response] Event
      */
-    type PlayCallback = (error: (Error|null), response?: Event) => void;
+    type DoPlayCallback = (error: (Error|null), response?: Event) => void;
+
+    /**
+     * Callback as used by {@link AudioRuntime#doSeek}.
+     * @param error Error, if any
+     * @param [response] AudioRuntimeStatus
+     */
+    type DoSeekCallback = (error: (Error|null), response?: AudioRuntimeStatus) => void;
+
+    /**
+     * Callback as used by {@link AudioRuntime#doStop}.
+     * @param error Error, if any
+     * @param [response] AudioRuntimeStatus
+     */
+    type DoStopCallback = (error: (Error|null), response?: AudioRuntimeStatus) => void;
 
     /**
      * Callback as used by {@link AudioRuntime#doTerminate}.

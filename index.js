@@ -5416,6 +5416,8 @@ $root.AudioRuntimeStatus = (function() {
      * Properties of an AudioRuntimeStatus.
      * @exports IAudioRuntimeStatus
      * @interface IAudioRuntimeStatus
+     * @property {number|null} [position] AudioRuntimeStatus position
+     * @property {boolean|null} [playing] AudioRuntimeStatus playing
      */
 
     /**
@@ -5432,6 +5434,22 @@ $root.AudioRuntimeStatus = (function() {
                 if (properties[keys[i]] != null)
                     this[keys[i]] = properties[keys[i]];
     }
+
+    /**
+     * AudioRuntimeStatus position.
+     * @member {number} position
+     * @memberof AudioRuntimeStatus
+     * @instance
+     */
+    AudioRuntimeStatus.prototype.position = 0;
+
+    /**
+     * AudioRuntimeStatus playing.
+     * @member {boolean} playing
+     * @memberof AudioRuntimeStatus
+     * @instance
+     */
+    AudioRuntimeStatus.prototype.playing = false;
 
     /**
      * Creates a new AudioRuntimeStatus instance using the specified properties.
@@ -5457,6 +5475,10 @@ $root.AudioRuntimeStatus = (function() {
     AudioRuntimeStatus.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
+        if (message.position != null && message.hasOwnProperty("position"))
+            writer.uint32(/* id 1, wireType 1 =*/9).double(message.position);
+        if (message.playing != null && message.hasOwnProperty("playing"))
+            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.playing);
         return writer;
     };
 
@@ -5491,6 +5513,12 @@ $root.AudioRuntimeStatus = (function() {
         while (reader.pos < end) {
             var tag = reader.uint32();
             switch (tag >>> 3) {
+            case 1:
+                message.position = reader.double();
+                break;
+            case 2:
+                message.playing = reader.bool();
+                break;
             default:
                 reader.skipType(tag & 7);
                 break;
@@ -5526,6 +5554,12 @@ $root.AudioRuntimeStatus = (function() {
     AudioRuntimeStatus.verify = function verify(message) {
         if (typeof message !== "object" || message === null)
             return "object expected";
+        if (message.position != null && message.hasOwnProperty("position"))
+            if (typeof message.position !== "number")
+                return "position: number expected";
+        if (message.playing != null && message.hasOwnProperty("playing"))
+            if (typeof message.playing !== "boolean")
+                return "playing: boolean expected";
         return null;
     };
 
@@ -5540,7 +5574,12 @@ $root.AudioRuntimeStatus = (function() {
     AudioRuntimeStatus.fromObject = function fromObject(object) {
         if (object instanceof $root.AudioRuntimeStatus)
             return object;
-        return new $root.AudioRuntimeStatus();
+        var message = new $root.AudioRuntimeStatus();
+        if (object.position != null)
+            message.position = Number(object.position);
+        if (object.playing != null)
+            message.playing = Boolean(object.playing);
+        return message;
     };
 
     /**
@@ -5552,8 +5591,19 @@ $root.AudioRuntimeStatus = (function() {
      * @param {$protobuf.IConversionOptions} [options] Conversion options
      * @returns {Object.<string,*>} Plain object
      */
-    AudioRuntimeStatus.toObject = function toObject() {
-        return {};
+    AudioRuntimeStatus.toObject = function toObject(message, options) {
+        if (!options)
+            options = {};
+        var object = {};
+        if (options.defaults) {
+            object.position = 0;
+            object.playing = false;
+        }
+        if (message.position != null && message.hasOwnProperty("position"))
+            object.position = options.json && !isFinite(message.position) ? String(message.position) : message.position;
+        if (message.playing != null && message.hasOwnProperty("playing"))
+            object.playing = message.playing;
+        return object;
     };
 
     /**
@@ -5763,31 +5813,31 @@ $root.AudioRuntime = (function() {
     };
 
     /**
-     * Callback as used by {@link AudioRuntime#updateSettings}.
+     * Callback as used by {@link AudioRuntime#doSetSettings}.
      * @memberof AudioRuntime
-     * @typedef UpdateSettingsCallback
+     * @typedef DoSetSettingsCallback
      * @type {function}
      * @param {Error|null} error Error, if any
      * @param {AudioRuntimeStatus} [response] AudioRuntimeStatus
      */
 
     /**
-     * Calls UpdateSettings.
-     * @function updateSettings
+     * Calls DoSetSettings.
+     * @function doSetSettings
      * @memberof AudioRuntime
      * @instance
      * @param {ISetSettings} request SetSettings message or plain object
-     * @param {AudioRuntime.UpdateSettingsCallback} callback Node-style callback called with the error, if any, and AudioRuntimeStatus
+     * @param {AudioRuntime.DoSetSettingsCallback} callback Node-style callback called with the error, if any, and AudioRuntimeStatus
      * @returns {undefined}
      * @variation 1
      */
-    Object.defineProperty(AudioRuntime.prototype.updateSettings = function updateSettings(request, callback) {
-        return this.rpcCall(updateSettings, $root.SetSettings, $root.AudioRuntimeStatus, request, callback);
-    }, "name", { value: "UpdateSettings" });
+    Object.defineProperty(AudioRuntime.prototype.doSetSettings = function doSetSettings(request, callback) {
+        return this.rpcCall(doSetSettings, $root.SetSettings, $root.AudioRuntimeStatus, request, callback);
+    }, "name", { value: "DoSetSettings" });
 
     /**
-     * Calls UpdateSettings.
-     * @function updateSettings
+     * Calls DoSetSettings.
+     * @function doSetSettings
      * @memberof AudioRuntime
      * @instance
      * @param {ISetSettings} request SetSettings message or plain object
@@ -5796,35 +5846,101 @@ $root.AudioRuntime = (function() {
      */
 
     /**
-     * Callback as used by {@link AudioRuntime#play}.
+     * Callback as used by {@link AudioRuntime#doPlay}.
      * @memberof AudioRuntime
-     * @typedef PlayCallback
+     * @typedef DoPlayCallback
      * @type {function}
      * @param {Error|null} error Error, if any
      * @param {Event} [response] Event
      */
 
     /**
-     * Calls Play.
-     * @function play
+     * Calls DoPlay.
+     * @function doPlay
      * @memberof AudioRuntime
      * @instance
      * @param {INoParameters} request NoParameters message or plain object
-     * @param {AudioRuntime.PlayCallback} callback Node-style callback called with the error, if any, and Event
+     * @param {AudioRuntime.DoPlayCallback} callback Node-style callback called with the error, if any, and Event
      * @returns {undefined}
      * @variation 1
      */
-    Object.defineProperty(AudioRuntime.prototype.play = function play(request, callback) {
-        return this.rpcCall(play, $root.NoParameters, $root.Event, request, callback);
-    }, "name", { value: "Play" });
+    Object.defineProperty(AudioRuntime.prototype.doPlay = function doPlay(request, callback) {
+        return this.rpcCall(doPlay, $root.NoParameters, $root.Event, request, callback);
+    }, "name", { value: "DoPlay" });
 
     /**
-     * Calls Play.
-     * @function play
+     * Calls DoPlay.
+     * @function doPlay
      * @memberof AudioRuntime
      * @instance
      * @param {INoParameters} request NoParameters message or plain object
      * @returns {Promise<Event>} Promise
+     * @variation 2
+     */
+
+    /**
+     * Callback as used by {@link AudioRuntime#doSeek}.
+     * @memberof AudioRuntime
+     * @typedef DoSeekCallback
+     * @type {function}
+     * @param {Error|null} error Error, if any
+     * @param {AudioRuntimeStatus} [response] AudioRuntimeStatus
+     */
+
+    /**
+     * Calls DoSeek.
+     * @function doSeek
+     * @memberof AudioRuntime
+     * @instance
+     * @param {ISeek} request Seek message or plain object
+     * @param {AudioRuntime.DoSeekCallback} callback Node-style callback called with the error, if any, and AudioRuntimeStatus
+     * @returns {undefined}
+     * @variation 1
+     */
+    Object.defineProperty(AudioRuntime.prototype.doSeek = function doSeek(request, callback) {
+        return this.rpcCall(doSeek, $root.Seek, $root.AudioRuntimeStatus, request, callback);
+    }, "name", { value: "DoSeek" });
+
+    /**
+     * Calls DoSeek.
+     * @function doSeek
+     * @memberof AudioRuntime
+     * @instance
+     * @param {ISeek} request Seek message or plain object
+     * @returns {Promise<AudioRuntimeStatus>} Promise
+     * @variation 2
+     */
+
+    /**
+     * Callback as used by {@link AudioRuntime#doStop}.
+     * @memberof AudioRuntime
+     * @typedef DoStopCallback
+     * @type {function}
+     * @param {Error|null} error Error, if any
+     * @param {AudioRuntimeStatus} [response] AudioRuntimeStatus
+     */
+
+    /**
+     * Calls DoStop.
+     * @function doStop
+     * @memberof AudioRuntime
+     * @instance
+     * @param {INoParameters} request NoParameters message or plain object
+     * @param {AudioRuntime.DoStopCallback} callback Node-style callback called with the error, if any, and AudioRuntimeStatus
+     * @returns {undefined}
+     * @variation 1
+     */
+    Object.defineProperty(AudioRuntime.prototype.doStop = function doStop(request, callback) {
+        return this.rpcCall(doStop, $root.NoParameters, $root.AudioRuntimeStatus, request, callback);
+    }, "name", { value: "DoStop" });
+
+    /**
+     * Calls DoStop.
+     * @function doStop
+     * @memberof AudioRuntime
+     * @instance
+     * @param {INoParameters} request NoParameters message or plain object
+     * @returns {Promise<AudioRuntimeStatus>} Promise
      * @variation 2
      */
 
