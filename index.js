@@ -5859,13 +5859,13 @@ $root.AudioRuntime = (function() {
      * @function doPlay
      * @memberof AudioRuntime
      * @instance
-     * @param {INoParameters} request NoParameters message or plain object
+     * @param {IPlay} request Play message or plain object
      * @param {AudioRuntime.DoPlayCallback} callback Node-style callback called with the error, if any, and Event
      * @returns {undefined}
      * @variation 1
      */
     Object.defineProperty(AudioRuntime.prototype.doPlay = function doPlay(request, callback) {
-        return this.rpcCall(doPlay, $root.NoParameters, $root.Event, request, callback);
+        return this.rpcCall(doPlay, $root.Play, $root.Event, request, callback);
     }, "name", { value: "DoPlay" });
 
     /**
@@ -5873,7 +5873,7 @@ $root.AudioRuntime = (function() {
      * @function doPlay
      * @memberof AudioRuntime
      * @instance
-     * @param {INoParameters} request NoParameters message or plain object
+     * @param {IPlay} request Play message or plain object
      * @returns {Promise<Event>} Promise
      * @variation 2
      */
@@ -5925,13 +5925,13 @@ $root.AudioRuntime = (function() {
      * @function doStop
      * @memberof AudioRuntime
      * @instance
-     * @param {INoParameters} request NoParameters message or plain object
+     * @param {IStop} request Stop message or plain object
      * @param {AudioRuntime.DoStopCallback} callback Node-style callback called with the error, if any, and AudioRuntimeStatus
      * @returns {undefined}
      * @variation 1
      */
     Object.defineProperty(AudioRuntime.prototype.doStop = function doStop(request, callback) {
-        return this.rpcCall(doStop, $root.NoParameters, $root.AudioRuntimeStatus, request, callback);
+        return this.rpcCall(doStop, $root.Stop, $root.AudioRuntimeStatus, request, callback);
     }, "name", { value: "DoStop" });
 
     /**
@@ -5939,7 +5939,7 @@ $root.AudioRuntime = (function() {
      * @function doStop
      * @memberof AudioRuntime
      * @instance
-     * @param {INoParameters} request NoParameters message or plain object
+     * @param {IStop} request Stop message or plain object
      * @returns {Promise<AudioRuntimeStatus>} Promise
      * @variation 2
      */

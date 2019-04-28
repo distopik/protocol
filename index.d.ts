@@ -2448,17 +2448,17 @@ export class AudioRuntime extends $protobuf.rpc.Service {
 
     /**
      * Calls DoPlay.
-     * @param request NoParameters message or plain object
+     * @param request Play message or plain object
      * @param callback Node-style callback called with the error, if any, and Event
      */
-    public doPlay(request: INoParameters, callback: AudioRuntime.DoPlayCallback): void;
+    public doPlay(request: IPlay, callback: AudioRuntime.DoPlayCallback): void;
 
     /**
      * Calls DoPlay.
-     * @param request NoParameters message or plain object
+     * @param request Play message or plain object
      * @returns Promise
      */
-    public doPlay(request: INoParameters): Promise<Event>;
+    public doPlay(request: IPlay): Promise<Event>;
 
     /**
      * Calls DoSeek.
@@ -2476,17 +2476,17 @@ export class AudioRuntime extends $protobuf.rpc.Service {
 
     /**
      * Calls DoStop.
-     * @param request NoParameters message or plain object
+     * @param request Stop message or plain object
      * @param callback Node-style callback called with the error, if any, and AudioRuntimeStatus
      */
-    public doStop(request: INoParameters, callback: AudioRuntime.DoStopCallback): void;
+    public doStop(request: IStop, callback: AudioRuntime.DoStopCallback): void;
 
     /**
      * Calls DoStop.
-     * @param request NoParameters message or plain object
+     * @param request Stop message or plain object
      * @returns Promise
      */
-    public doStop(request: INoParameters): Promise<AudioRuntimeStatus>;
+    public doStop(request: IStop): Promise<AudioRuntimeStatus>;
 
     /**
      * Calls DoTerminate.

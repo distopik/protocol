@@ -311,8 +311,8 @@ message NoParameters {
 
 service AudioRuntime {
     rpc DoSetSettings (SetSettings) returns (AudioRuntimeStatus);
-    rpc DoPlay (NoParameters) returns (stream Event);
+    rpc DoPlay (Play) returns (stream Event);
     rpc DoSeek (Seek) returns (AudioRuntimeStatus);
-    rpc DoStop (NoParameters) returns (AudioRuntimeStatus);
+    rpc DoStop (Stop) returns (AudioRuntimeStatus);
     rpc DoTerminate (Terminate) returns (AudioRuntimeStatus);
 }
