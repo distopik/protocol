@@ -13,6 +13,7 @@ message ExchangeChannels {
 
 message ProvideChannels {
     repeated ChannelData channels = 1;
+    uint32 depth = 2;
 }
 
 service AudioServer {
